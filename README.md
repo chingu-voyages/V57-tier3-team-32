@@ -11,7 +11,6 @@ TDB
 
 [Standup](https://discord.com/channels/330284646283608064/1411707782763380788/threads/1412451269838110751)
 
-[Product Requirements Document](https://docs.google.com/document/d/1r040zM4AO6fusfnMjCPK8TxqfH_CW5NuDRIn2JgnPBc/edit?usp=sharing)
 
 ## Our Team
 
@@ -24,5 +23,5 @@ coding!
 - Nadeem: [GitHub](https://github.com/707)
 - snowbytes: [Github](https://github.com/snowbytes)
 - devim: [GitHub](https://github.com/devimalka) / [LinkedIn](https://linkedin.com/in/oshada-kularathne/)
-- Teammate name #n: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
 - BettyC:  [GitHub](https://github.com/BettyC2002) / [LinkedIn](https://www.linkedin.com/in/bethrand-patience-131544333)
+- theDevGuy578: [GitHub](https://github.com/LMgit91)
