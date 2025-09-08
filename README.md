@@ -11,7 +11,6 @@ TDB
 
 [Standup](https://discord.com/channels/330284646283608064/1411707782763380788/threads/1412451269838110751)
 
-[Product Requirements Document](https://docs.google.com/document/d/1r040zM4AO6fusfnMjCPK8TxqfH_CW5NuDRIn2JgnPBc/edit?usp=sharing)
 
 ## Our Team
 
