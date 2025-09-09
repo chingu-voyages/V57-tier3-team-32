@@ -4,6 +4,13 @@
   "version": "1.0.0",
   "description": "a monorepo for the PR Viewer project",
   "license": "ISC",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "client:start": "npm run start --workspace=@pr-viewer/client",
+    "server:start": "npm run start --workspace=@pr-viewer/server"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chingu-voyages/V57-tier3-team-32.git"

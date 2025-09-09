@@ -1,0 +1,11 @@
+{
+  "name": "@pr-viewer/client",
+  "private": true,
+  "version": "1.0.0",
+  "description": "frontend web client for the PR Viewer project",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  }
+}
