@@ -8,7 +8,8 @@
     "apps/*"
   ],
   "scripts": {
-    "client:start": "npm run start --workspace=@pr-viewer/client",
+    "client:dev": "npm run dev --workspace=@pr-viewer/client",
+    "client:build": "npm run build --workspace=@pr-viewer/client",
     "server:start": "npm run start --workspace=@pr-viewer/server"
   },
   "repository": {
