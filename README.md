@@ -28,14 +28,15 @@ root/
 
 ## Dev setup
 
-1. Install dependencies from the monorepo's root
+1. Specify env vars for each workspace as referenced in `.env.example`
+2. Install dependencies from the monorepo's root
 
    ```sh
    # from the root of the repo
    npm ci
    ```
 
-2. Start the frontend dev server
+3. Start the frontend dev server
 
    ```sh
    # from the root of the repo
