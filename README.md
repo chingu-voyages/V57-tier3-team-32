@@ -26,6 +26,23 @@ root/
             └── index.js
 ```
 
+## Dev setup
+
+1. Specify env vars for each workspace as referenced in `.env.example`
+2. Install dependencies from the monorepo's root
+
+   ```sh
+   # from the root of the repo
+   npm ci
+   ```
+
+3. Start the frontend dev server
+
+   ```sh
+   # from the root of the repo
+   npm run client:dev
+   ```
+
 ## Team Documents and Channels
 
 [Meetings & Decisions](https://discord.com/channels/330284646283608064/1411707782763380788/threads/1412889569082216518)
