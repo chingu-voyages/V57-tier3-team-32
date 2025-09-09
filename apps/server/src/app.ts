@@ -8,6 +8,10 @@ app.use(function logIncomingRequests(req, _, next) {
   next()
 })
 
+app.get('/health', function(_, res) {
+  res.status(200).send("OK")
+})
+
 app.use(function notFound(_, res) {
   res.status(404).json({ message: "Route not found" })
 });
