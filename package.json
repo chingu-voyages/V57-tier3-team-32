@@ -1,0 +1,18 @@
+{
+  "name": "pr-viewer",
+  "private": true,
+  "version": "1.0.0",
+  "description": "a monorepo for the PR Viewer project",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chingu-voyages/V57-tier3-team-32.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chingu-voyages/V57-tier3-team-32/issues"
+  },
+  "homepage": "https://github.com/chingu-voyages/V57-tier3-team-32#readme",
+  "contributors": [
+    "See contributors at https://github.com/chingu-voyages/V57-tier3-team-32/graphs/contributors"
+  ]
+}
