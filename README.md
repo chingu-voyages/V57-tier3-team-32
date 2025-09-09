@@ -5,6 +5,27 @@ Welcome to the TDB Name! This web application helps development teams track thei
 # Tech stack
 TDB
 
+## Repo Structure
+
+```txt
+root/
+├── README.md
+├── package-lock.json
+├── package.json
+├── docs/
+└── apps/
+    ├── client/
+    |   ├── package.json
+    │   ├── .env
+    │   └── src/
+    │       └── index.js
+    └── server/
+        ├── package.json
+        ├── .env
+        └── src/
+            └── index.js
+```
+
 ## Team Documents and Channels
 
 [Meetings & Decisions](https://discord.com/channels/330284646283608064/1411707782763380788/threads/1412889569082216518)
