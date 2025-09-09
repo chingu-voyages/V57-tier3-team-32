@@ -10,6 +10,8 @@
   "scripts": {
     "client:dev": "npm run dev --workspace=@pr-viewer/client",
     "client:build": "npm run build --workspace=@pr-viewer/client",
+    "server:dev": "npm run dev --workspace=@pr-viewer/server",
+    "server:build": "npm run build --workspace=@pr-viewer/server",
     "server:start": "npm run start --workspace=@pr-viewer/server"
   },
   "repository": {

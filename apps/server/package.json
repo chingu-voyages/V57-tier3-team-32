@@ -4,8 +4,21 @@
   "version": "1.0.0",
   "description": "backend API server for the PR Viewer project",
   "type": "module",
-  "main": "src/index.js",
+  "main": "src/server.js",
+  "engines": {
+    "node": "^20.13.0 || >= v22.0.0"
+  },
   "scripts": {
-    "start": "node src/index.js"
+    "dev": "tsx --watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
+  "dependencies": {
+    "express": "5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "5.0.3",
+    "tsx": "4.20.5",
+    "typescript": "5.9.2"
   }
 }
