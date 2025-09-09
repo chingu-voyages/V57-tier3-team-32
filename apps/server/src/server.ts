@@ -1,5 +1,10 @@
 import app from "./app.js";
 
-app.listen(3000, function onServerListen() {
-  console.log(`> listening to http://localhost:3000`)
+const { PORT } = process.env
+if (PORT == undefined) {
+  throw new Error("PORT env var not set")
+}
+
+app.listen(PORT, function onServerListen() {
+  console.log(`> listening to http://localhost:${PORT}`)
 })
