@@ -18,12 +18,12 @@ root/
     |   ├── package.json
     │   ├── .env
     │   └── src/
-    │       └── index.js
+    │       └── main.tsx
     └── server/
         ├── package.json
         ├── .env
         └── src/
-            └── index.js
+            └── server.ts
 ```
 
 ## Dev setup
@@ -36,10 +36,11 @@ root/
    npm ci
    ```
 
-3. Start the frontend dev server
+3. Start the backend and frontend dev servers
 
    ```sh
-   # from the root of the repo
+   # from the root of the repo on separate terminals
+   npm run server:dev
    npm run client:dev
    ```
 
