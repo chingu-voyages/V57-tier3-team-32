@@ -44,6 +44,10 @@ root/
    npm run client:dev
    ```
 
+## Deployment URLS
+
+1. Frontend Netlify Deployment : https://v57-tier3-team-32.netlify.app/
+
 ## Team Documents and Channels
 
 [Meetings & Decisions](https://discord.com/channels/330284646283608064/1411707782763380788/threads/1412889569082216518)
