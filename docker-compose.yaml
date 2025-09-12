@@ -1,0 +1,34 @@
+services:
+  fe-pr-review:
+    build:
+      context: ./apps/client
+      dockerfile: Dockerfile
+      args:
+        - VITE_BACKEND_URL=${VITE_BACKEND_URL}
+    container_name: fe-pr-review
+    ports:
+      - "3000:80"
+    env_file:
+      - ./apps/client/.env
+    depends_on:
+      - be-pr-review
+    networks:
+      - pr-review-network
+    restart: unless-stopped
+
+  be-pr-review:
+    build:
+      context: ./apps/server
+      dockerfile: Dockerfile
+    container_name: be-pr-review
+    ports:
+      - "3001:3001"
+    env_file:
+      - ./apps/server/.env
+    networks:
+      - pr-review-network
+    restart: unless-stopped
+
+networks:
+  pr-review-network:
+    driver: bridge
