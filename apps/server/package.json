@@ -14,15 +14,15 @@
     "start": "node dist/server.js"
   },
   "dependencies": {
-    "cors": "^2.8.5",
+    "cors": "2.8.5",
     "express": "5.1.0"
   },
   "devDependencies": {
     "@dotenvx/dotenvx": "1.49.0",
-    "@types/cors": "^2.8.19",
+    "@types/cors": "2.8.19",
     "@types/express": "5.0.3",
-    "nodemon": "^3.1.10",
-    "ts-node": "^10.9.2",
+    "nodemon": "3.1.10",
+    "ts-node": "10.9.2",
     "tsx": "4.20.5",
     "typescript": "5.9.2"
   }
