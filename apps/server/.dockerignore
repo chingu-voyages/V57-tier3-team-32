@@ -1,2 +1,6 @@
-node_modules
-.env
+# follow a whitelist approach
+**
+
+!src/
+!package.json
+!tsconfig.json
