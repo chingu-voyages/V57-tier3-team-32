@@ -1,32 +1,44 @@
 services:
-  fe-pr-review:
+  web:
+    container_name: web
+    command: ["npm", "run", "client:dev", "--", "--", "--host"]
     build:
-      context: ./apps/client
+      target: base
       dockerfile: Dockerfile
-    container_name: fe-pr-review
+      context: apps/client/
+      additional_contexts:
+        - monorepo-root=./
+    volumes:
+      - ./apps/client/:/home/node/app/apps/client/
+      - /home/node/app/apps/client/node_modules/
     ports:
-      - "3000:8080"
-    env_file:
-      - ./apps/client/.env
-    depends_on:
-      - be-pr-review
+      - "${CLIENT_PORT}:${CLIENT_PORT}"
     networks:
-      - pr-review-network
+      - shared-net
+    depends_on:
+      - server
     restart: unless-stopped
 
-  be-pr-review:
+  server:
+    container_name: server
+    # see https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#handling-kernel-signals
+    init: true
     build:
-      context: ./apps/server
+      target: base
       dockerfile: Dockerfile
-    container_name: be-pr-review
+      context: apps/server/
+      additional_contexts:
+        - monorepo-root=./
+    command: ["npm", "run", "server:dev"]
+    volumes:
+      - ./apps/server/:/home/node/app/apps/server/
+      - /home/node/app/apps/server/node_modules/
     ports:
-      - "3000:3000"
-    env_file:
-      - ./apps/server/.env
+      - "${SERVER_PORT}:${SERVER_PORT}"
     networks:
-      - pr-review-network
+      - shared-net
     restart: unless-stopped
 
 networks:
-  pr-review-network:
+  shared-net:
     driver: bridge
