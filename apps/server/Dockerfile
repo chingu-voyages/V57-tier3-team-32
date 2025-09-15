@@ -1,53 +1,32 @@
-# Build stage
-FROM node:20-alpine AS build
+# escape=`
+# oldest supported node version for `node --watch`
+FROM node:20.13.0-alpine AS base
+WORKDIR /home/node/app/
 
-# Set working directory
-WORKDIR /app
+# defined as additional_context
+COPY --from=monorepo-root package*.json .npmrc ./
+COPY package.json apps/server/
+RUN npm ci --workspace=@pr-viewer/server
 
-# Copy package files
-COPY package*.json ./
+FROM base AS build
+WORKDIR /home/node/app/
 
-# Install all dependencies
-RUN npm i
+COPY ./ apps/server/
+RUN npm run server:build
 
-# Copy source code
-COPY . .
+FROM node:20.13.0-alpine AS prod
+USER node:node
+WORKDIR /home/node/app/
 
-# Build TypeScript to JavaScript
-RUN npm run build
+ENV NODE_ENV=production
 
-# Production stage
-FROM node:20-alpine AS production
+COPY --chown=node:node --from=monorepo-root package*.json .npmrc ./
+COPY --chown=node:node package.json apps/server/
+RUN npm ci --omit=dev --workspace=@pr-viewer/server
 
-# Set working directory
-WORKDIR /app
+COPY --chown=node:node --from=build /home/node/app/apps/server/dist/ apps/server/dist/
 
-# Copy package files
-COPY package*.json ./
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 `
+  CMD curl -f http://localhost:${PORT}/health || exit 1
 
-# Install all dependencies
-RUN npm i
-
-# Keep production dependencies only for runtime
-RUN npm prune --omit=dev
-
-# Copy built JavaScript files from build stage
-COPY --from=build /app/dist ./dist
-
-# Create non-root user for security
-RUN addgroup -g 1001 -S nodejs && \
-  adduser -S nodejs -u 1001
-
-# Change ownership of app directory
-RUN chown -R nodejs:nodejs /app
-USER nodejs
-
-# Expose the port your app runs on
-EXPOSE 3001
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:3001/health || exit 1
-
-# Start the application
-CMD ["node", "dist/server.js"]
+CMD ["node", "apps/server/dist/server.js"]

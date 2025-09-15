@@ -3,11 +3,9 @@ services:
     build:
       context: ./apps/client
       dockerfile: Dockerfile
-      args:
-        - VITE_BACKEND_URL=${VITE_BACKEND_URL}
     container_name: fe-pr-review
     ports:
-      - "3000:80"
+      - "3000:8080"
     env_file:
       - ./apps/client/.env
     depends_on:
@@ -22,7 +20,7 @@ services:
       dockerfile: Dockerfile
     container_name: be-pr-review
     ports:
-      - "3001:3001"
+      - "3000:3000"
     env_file:
       - ./apps/server/.env
     networks:

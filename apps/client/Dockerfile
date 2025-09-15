@@ -1,41 +1,26 @@
-# Build stage
-FROM node:20-alpine AS build
+# escape=`
+# oldest supported node version for `@vitejs/plugin-react@5.0.0`
+FROM node:20.19.0-alpine AS base
+WORKDIR /home/node/app/
 
-# Set working directory
-WORKDIR /app
+# defined as additional_context
+COPY --from=monorepo-root package*.json .npmrc ./
+COPY package.json apps/client/
+RUN npm ci --workspace=@pr-viewer/client
 
-# Copy package files
-COPY package*.json ./
+FROM base AS build
+WORKDIR /home/node/app/
 
-# Install dependencies
-RUN npm i
+COPY ./ apps/client/
+RUN npm run client:build
 
-# Declare a build argument for the backend URL
-ARG VITE_BACKEND_URL
+FROM nginx:alpine AS prod
+RUN chown -R nginx:nginx /var/cache/nginx/ /var/run/
+USER nginx:nginx
 
-# Set the environment variable using the build argument.
-ENV VITE_BACKEND_URL=$VITE_BACKEND_URL
+COPY --chown=nginx:nginx --from=build /home/node/app/apps/client/dist/ /usr/share/nginx/html/
+COPY --chown=nginx:nginx nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copy source code
-COPY . .
+EXPOSE 8080
 
-# Build the application
-RUN npm run build
-
-# Production stage
-FROM nginx:alpine
-
-# Create logs directory
-RUN mkdir -p /var/log/nginx
-
-# Copy custom nginx config
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Copy built assets from build stage
-COPY --from=build /app/dist /usr/share/nginx/html
-
-# Expose port
-EXPOSE 80
-
-# Start nginx
 CMD ["nginx", "-g", "daemon off;"]
