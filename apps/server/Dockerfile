@@ -27,6 +27,6 @@ RUN npm ci --omit=dev --workspace=@pr-viewer/server
 COPY --chown=node:node --from=build /home/node/app/apps/server/dist/ apps/server/dist/
 
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 `
-  CMD curl -f http://localhost:${PORT}/health || exit 1
+  CMD sh -c 'wget -qO- http://localhost:$PORT/health || exit 1'
 
 CMD ["node", "apps/server/dist/server.js"]
