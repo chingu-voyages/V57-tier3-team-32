@@ -1,28 +1,44 @@
 {
-  "name": "pr-viewer",
-  "private": true,
-  "version": "1.0.0",
-  "description": "a monorepo for the PR Viewer project",
-  "license": "ISC",
-  "workspaces": [
-    "apps/*"
-  ],
-  "scripts": {
-    "client:dev": "npm run dev --workspace=@pr-viewer/client",
-    "client:build": "npm run build --workspace=@pr-viewer/client",
-    "server:dev": "npm run dev --workspace=@pr-viewer/server",
-    "server:build": "npm run build --workspace=@pr-viewer/server",
-    "server:start": "npm run start --workspace=@pr-viewer/server"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/chingu-voyages/V57-tier3-team-32.git"
-  },
-  "bugs": {
-    "url": "https://github.com/chingu-voyages/V57-tier3-team-32/issues"
-  },
-  "homepage": "https://github.com/chingu-voyages/V57-tier3-team-32#readme",
-  "contributors": [
-    "See contributors at https://github.com/chingu-voyages/V57-tier3-team-32/graphs/contributors"
-  ]
+    "name": "pr-viewer",
+    "private": true,
+    "version": "1.0.0",
+    "description": "a monorepo for the PR Viewer project",
+    "license": "ISC",
+    "workspaces": [
+        "apps/*"
+    ],
+    "scripts": {
+        "client:dev": "npm run dev --workspace=@pr-viewer/client",
+        "client:build": "npm run build --workspace=@pr-viewer/client",
+        "server:dev": "npm run dev --workspace=@pr-viewer/server",
+        "server:build": "npm run build --workspace=@pr-viewer/server",
+        "server:start": "npm run start --workspace=@pr-viewer/server",
+        "prettier:check": "npx prettier . --check",
+        "prettier:write": "npx prettier . --write",
+        "eslint:lint": "npx eslint -c eslint.config.mts",
+        "eslint:fix": "npx eslint -c eslint.config.mts --fix"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/chingu-voyages/V57-tier3-team-32.git"
+    },
+    "bugs": {
+        "url": "https://github.com/chingu-voyages/V57-tier3-team-32/issues"
+    },
+    "homepage": "https://github.com/chingu-voyages/V57-tier3-team-32#readme",
+    "contributors": [
+        "See contributors at https://github.com/chingu-voyages/V57-tier3-team-32/graphs/contributors"
+    ],
+    "devDependencies": {
+        "@eslint/js": "^9.35.0",
+        "eslint": "^9.35.0",
+        "globals": "^16.4.0",
+        "jiti": "^2.5.1",
+        "typescript": "^5.9.2",
+        "typescript-eslint": "^8.43.0"
+    },
+    "dependencies": {
+        "@typescript-eslint/parser": "^8.43.0",
+        "eslint-config-prettier": "^10.1.8"
+    }
 }
