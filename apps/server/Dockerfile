@@ -1,10 +1,11 @@
 # escape=`
-# oldest supported node version for `node --watch`
-FROM node:20.13.0-alpine AS base
+# oldest supported node version for `lint-staged@16.1.6`
+FROM node:20.17.0-alpine AS base
 WORKDIR /home/node/app/
 
 # defined as additional_context
 COPY --from=monorepo-root package*.json .npmrc ./
+COPY --from=monorepo-root scripts/prepare.js scripts/
 COPY package.json apps/server/
 RUN npm ci --workspace=@pr-viewer/server
 
@@ -14,7 +15,7 @@ WORKDIR /home/node/app/
 COPY ./ apps/server/
 RUN npm run server:build
 
-FROM node:20.13.0-alpine AS prod
+FROM node:20.17.0-alpine AS prod
 USER node:node
 WORKDIR /home/node/app/
 
