@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "description": "a monorepo for the PR Viewer project",
   "license": "ISC",
+  "type": "module",
   "workspaces": [
     "apps/*"
   ],
@@ -12,13 +13,20 @@
     "client:dev": "npm run dev --workspace=@pr-viewer/client",
     "client:build": "npm run build --workspace=@pr-viewer/client",
     "client:format": "npm run format --workspace=@pr-viewer/client",
+    "client:lint": "npm run lint --workspace=@pr-viewer/client",
     "server:dev": "npm run dev --workspace=@pr-viewer/server",
     "server:build": "npm run build --workspace=@pr-viewer/server",
     "server:start": "npm run start --workspace=@pr-viewer/server",
-    "server:format": "npm run format --workspace=@pr-viewer/server"
+    "server:format": "npm run format --workspace=@pr-viewer/server",
+    "server:lint": "npm run lint --workspace=@pr-viewer/server"
   },
   "devDependencies": {
-    "prettier": "3.6.2"
+    "@eslint/js": "9.35.0",
+    "eslint": "9.35.0",
+    "eslint-config-prettier": "10.1.8",
+    "globals": "16.4.0",
+    "prettier": "3.6.2",
+    "typescript-eslint": "8.44.0"
   },
   "repository": {
     "type": "git",
