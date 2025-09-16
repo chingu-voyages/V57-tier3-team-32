@@ -8,11 +8,17 @@
     "apps/*"
   ],
   "scripts": {
+    "all:format": "prettier . --write",
     "client:dev": "npm run dev --workspace=@pr-viewer/client",
     "client:build": "npm run build --workspace=@pr-viewer/client",
+    "client:format": "npm run format --workspace=@pr-viewer/client",
     "server:dev": "npm run dev --workspace=@pr-viewer/server",
     "server:build": "npm run build --workspace=@pr-viewer/server",
-    "server:start": "npm run start --workspace=@pr-viewer/server"
+    "server:start": "npm run start --workspace=@pr-viewer/server",
+    "server:format": "npm run format --workspace=@pr-viewer/server"
+  },
+  "devDependencies": {
+    "prettier": "3.6.2"
   },
   "repository": {
     "type": "git",
