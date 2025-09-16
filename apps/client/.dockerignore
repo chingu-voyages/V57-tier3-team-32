@@ -1,2 +1,10 @@
-node_modules
-.env
+# follow a whitelist approach
+**
+
+!public/
+!src/
+!index.html
+!nginx.conf
+!package.json
+!tsconfig*.json
+!vite.config.ts

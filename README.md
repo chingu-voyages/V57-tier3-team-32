@@ -10,16 +10,21 @@ TDB
 ```txt
 root/
 ├── README.md
+├── docker-compose.yaml
 ├── package-lock.json
 ├── package.json
+├── .env
 ├── docs/
 └── apps/
     ├── client/
+    │   ├── Dockerfile
+    |   ├── package.json
     |   ├── package.json
     │   ├── .env
     │   └── src/
     │       └── main.tsx
     └── server/
+    │   ├── Dockerfile
         ├── package.json
         ├── .env
         └── src/
@@ -28,20 +33,28 @@ root/
 
 ## Dev setup
 
-1. Specify env vars for each workspace as referenced in `.env.example`
-2. Install dependencies from the monorepo's root
+1. Specify env vars for root and each workspace as referenced in `.env.example`
+2. spin up dev containers through compose
 
    ```sh
    # from the root of the repo
-   npm ci
+   docker compose up --build -d
+   docker compose logs -f
    ```
 
-3. Start the backend and frontend dev servers
+   - if you only need 1 workspace, you can spin its related container instead
+
+      ```sh
+      # spins only the backend's container, named `server` in the compose file 
+      docker compose up --build -d server
+      docker compose logs -f server
+      ```
+
+3. stop the containers when done
 
    ```sh
-   # from the root of the repo on separate terminals
-   npm run server:dev
-   npm run client:dev
+   # from the root of the repo once again
+   docker compose down -v
    ```
 
 ## Deployment URLS

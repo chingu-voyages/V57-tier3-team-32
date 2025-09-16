@@ -9,7 +9,7 @@
     "node": "^20.13.0 || >= v22.0.0"
   },
   "scripts": {
-    "dev": "dotenvx run -- tsx --watch src/server.ts",
+    "dev": "dotenvx run -- nodemon src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js"
   },
@@ -21,6 +21,8 @@
     "@dotenvx/dotenvx": "1.49.0",
     "@types/cors": "^2.8.19",
     "@types/express": "5.0.3",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
     "tsx": "4.20.5",
     "typescript": "5.9.2"
   }
