@@ -5,6 +5,9 @@
   "description": "a monorepo for the PR Viewer project",
   "license": "ISC",
   "type": "module",
+  "engines": {
+    "node": ">= 20.17"
+  },
   "workspaces": [
     "apps/*"
   ],
