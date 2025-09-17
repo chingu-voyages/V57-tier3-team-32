@@ -1,8 +1,8 @@
 {
-    "watch": ["src/"],
-    "ignore": ["node_modules/**"],
-    "ext": "ts",
-    "execMap": {
-      "ts": "node --no-warnings=ExperimentalWarning --loader ts-node/esm"
-    }
+  "watch": ["src/"],
+  "ignore": ["node_modules/**"],
+  "ext": "ts",
+  "execMap": {
+    "ts": "node --no-warnings=ExperimentalWarning --loader ts-node/esm"
   }
+}

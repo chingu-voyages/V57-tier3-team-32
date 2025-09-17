@@ -1,16 +1,20 @@
-import { defineConfig } from 'eslint/config'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import globals from 'globals'
+import { defineConfig } from "eslint/config";
+import reactDom from "eslint-plugin-react-dom";
+import reactHooks from "eslint-plugin-react-hooks";
+import reactRefresh from "eslint-plugin-react-refresh";
+import reactX from "eslint-plugin-react-x";
+import globals from "globals";
 
 import { makeConfigFromBase } from "../../configs/eslint-factory.js";
 
 export default makeConfigFromBase(
   defineConfig([
     {
-      files: ['**/*.{ts,tsx}'],
+      files: ["**/*.{ts,tsx}"],
       extends: [
-        reactHooks.configs['recommended-latest'],
+        reactX.configs["recommended-type-checked"],
+        reactHooks.configs["recommended-latest"],
+        reactDom.configs.recommended,
         reactRefresh.configs.vite,
       ],
     },
@@ -19,5 +23,5 @@ export default makeConfigFromBase(
         globals: globals.browser,
       },
     },
-  ])
-)
+  ]),
+);
