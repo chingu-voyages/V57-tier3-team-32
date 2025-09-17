@@ -1,20 +1,19 @@
-// import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import {healthCheck} from "./api/healthCheck"
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import { healthCheck } from "./api/healthCheck";
 
 function App() {
-  // const [count, setCount] = useState(0)
   const alertHealthCheck = async () => {
-    try{
-        const response = await healthCheck()
-        console.log(response)
-        alert(`Health check response: ${response.status} ${response.data?.message}`)
-    }catch(e){
-        console.error("health check failed", e)
+    try {
+      const response = await healthCheck();
+      alert(
+        `health check response: ${response.status} - ${response.data ?? "body is empty!"}`,
+      );
+    } catch (e) {
+      console.error("health check failed", e);
     }
-  }
+  };
   return (
     <>
       <div>
@@ -27,9 +26,7 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={alertHealthCheck}>
-          health check
-        </button>
+        <button onClick={() => alertHealthCheck}>health check</button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
@@ -38,7 +35,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
