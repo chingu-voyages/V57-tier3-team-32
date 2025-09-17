@@ -10,6 +10,8 @@
   },
   "scripts": {
     "dev": "dotenvx run -- nodemon src/server.ts",
+    "test": "node --test --no-warnings=ExperimentalWarning --loader ts-node/esm src/**/*.{spec,test}.ts",
+    "test:watch": "node --test --watch --no-warnings=ExperimentalWarning --loader ts-node/esm src/**/*.{spec,test}.ts",
     "build": "tsc",
     "start": "node dist/server.js",
     "format": "prettier . --write",
