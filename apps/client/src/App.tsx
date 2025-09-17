@@ -8,10 +8,10 @@ function App() {
     try {
       const response = await healthCheck();
       alert(
-        `health check response: ${response.status} - ${response.data ?? "body is empty!"}`,
+        `health check response: ${response.status} - ${JSON.stringify(response.data)}`,
       );
-    } catch (e) {
-      console.error("health check failed", e);
+    } catch {
+      console.error("health check failed");
     }
   };
   return (

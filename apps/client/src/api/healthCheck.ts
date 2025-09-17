@@ -1,16 +1,21 @@
-import axios from "axios";
-
-const { VITE_BACKEND_URL: BACKEND_URL } = import.meta.env;
-if (BACKEND_URL == undefined) {
-  throw new Error("BACKEND_URL env var not set");
+const { VITE_BACKEND_URL: BASE_URL } = import.meta.env;
+if (BASE_URL == undefined) {
+  throw new Error("BASE_URL not set");
 }
 
-export const healthCheck = async () => {
+export async function healthCheck() {
+  const options = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+
   try {
-    const response = await axios.get(`${BACKEND_URL}/health`);
-    return response;
-  } catch (e) {
-    console.error("health check failed", e);
-    throw e;
+    const response = await fetch(`${BASE_URL}`, options);
+    const data = (await response.json()) as Record<string, string>;
+
+    return { status: response.status, data };
+  } catch (err) {
+    console.error("An unexpected error happened", err);
+    throw err;
   }
-};
+}
