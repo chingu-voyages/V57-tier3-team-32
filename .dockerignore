@@ -3,3 +3,4 @@
 
 !.npmrc
 !package*.json
+!scripts/prepare.js
