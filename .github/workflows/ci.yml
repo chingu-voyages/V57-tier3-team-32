@@ -22,3 +22,13 @@ jobs:
         run: npm ci
       - name: Run lint
         run: npm run lint --workspace=@pr-viewer/client
+      
+      - name: Lint
+        run: npm run all:lint
+      
+      - name: Format check
+        run: npm run all:format:check
+
+      - name: Test
+        run: npm run all:test
+
