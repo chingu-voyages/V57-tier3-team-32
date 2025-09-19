@@ -4,15 +4,36 @@
   "version": "1.0.0",
   "description": "a monorepo for the PR Viewer project",
   "license": "ISC",
+  "type": "module",
+  "engines": {
+    "node": ">= 20.17"
+  },
   "workspaces": [
     "apps/*"
   ],
   "scripts": {
+    "prepare": "node scripts/prepare.js",
+    "all:format": "prettier . --write",
     "client:dev": "npm run dev --workspace=@pr-viewer/client",
     "client:build": "npm run build --workspace=@pr-viewer/client",
+    "client:format": "npm run format --workspace=@pr-viewer/client",
+    "client:lint": "npm run lint --workspace=@pr-viewer/client",
     "server:dev": "npm run dev --workspace=@pr-viewer/server",
+    "server:test": "npm run test --workspace=@pr-viewer/server",
+    "server:test:watch": "npm run test:watch --workspace=@pr-viewer/server",
     "server:build": "npm run build --workspace=@pr-viewer/server",
-    "server:start": "npm run start --workspace=@pr-viewer/server"
+    "server:start": "npm run start --workspace=@pr-viewer/server",
+    "server:format": "npm run format --workspace=@pr-viewer/server",
+    "server:lint": "npm run lint --workspace=@pr-viewer/server"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.35.0",
+    "eslint": "9.35.0",
+    "eslint-config-prettier": "10.1.8",
+    "globals": "16.4.0",
+    "lint-staged": "16.1.6",
+    "prettier": "3.6.2",
+    "typescript-eslint": "8.44.0"
   },
   "repository": {
     "type": "git",

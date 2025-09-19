@@ -9,19 +9,25 @@
     "node": "^20.13.0 || >= v22.0.0"
   },
   "scripts": {
-    "dev": "dotenvx run -- tsx --watch src/server.ts",
+    "dev": "dotenvx run -- nodemon src/server.ts",
+    "test": "node --test --no-warnings=ExperimentalWarning --loader ts-node/esm src/**/*.{spec,test}.ts",
+    "test:watch": "node --test --watch --no-warnings=ExperimentalWarning --loader ts-node/esm src/**/*.{spec,test}.ts",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "format": "prettier . --write",
+    "lint": "eslint ."
   },
   "dependencies": {
-    "cors": "^2.8.5",
+    "cors": "2.8.5",
     "express": "5.1.0"
   },
   "devDependencies": {
     "@dotenvx/dotenvx": "1.49.0",
-    "@types/cors": "^2.8.19",
+    "@types/cors": "2.8.19",
     "@types/express": "5.0.3",
-    "tsx": "4.20.5",
+    "eslint-plugin-n": "17.23.0",
+    "nodemon": "3.1.10",
+    "ts-node": "10.9.2",
     "typescript": "5.9.2"
   }
 }

@@ -1,0 +1,6 @@
+# follow a whitelist approach
+**
+
+!.npmrc
+!package*.json
+!scripts/prepare.js
