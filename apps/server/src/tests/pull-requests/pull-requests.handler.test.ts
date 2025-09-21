@@ -2,16 +2,15 @@ import { test, describe, beforeEach, afterEach, mock } from 'node:test';
 import assert from 'node:assert';
 import type { Request, Response } from 'express';
 import { getAllPullRequests } from '../../handlers/pull-requests.handler.js';
+import axios from 'axios';
 
 const originalEnv = process.env;
-// const pullRequestsService = await import('../../services/pull-requests.service.js');
 
 describe('Pull Requests Handler', () => {
   let mockReq: Partial<Request>;
   let mockRes: Partial<Response>;
   let statusMock: any;
   let jsonMock: any;
-  let fetchMock: any;
 
   beforeEach(() => {
     mock.restoreAll();
@@ -80,27 +79,60 @@ describe('Pull Requests Handler', () => {
       query: { owner: 'testowner', repo: 'testrepo' }
     };
 
-    const mockPullRequests = [
+    const mockPullRequests = {
+      data: [
+        {
+          number: 1,
+          title: 'Test PR 1',
+          user: { login: 'user1' },
+          created_at: '2024-01-01T00:00:00Z',
+          requested_reviewers: [{ login: 'reviewer1' }, { login: 'reviewer2' }],
+          merged_at: null,
+          state: 'open',
+          updated_at: '2024-01-02T00:00:00Z'
+        },
+        {
+          number: 2,
+          title: 'Test PR 2',
+          user: { login: 'user2' },
+          created_at: '2024-01-03T00:00:00Z',
+          requested_reviewers: [],
+          merged_at: '2024-01-04T00:00:00Z',
+          state: 'closed',
+          updated_at: '2024-01-04T00:00:00Z'
+        }
+      ]
+    };
+
+        const expected = [
       {
         prNumber: 1,
-        title: 'Test PR',
-        creator: 'testuser',
+        title: 'Test PR 1',
+        creator: 'user1',
         creationTimestamp: '2024-01-01T00:00:00Z',
-        requestedReviewers: ['reviewer1'],
+        requestedReviewers: ['reviewer1', 'reviewer2'],
         lastActionType: 'open',
-        lastActionTimestamp: '2024-01-01T00:00:00Z'
+        lastActionTimestamp: '2024-01-02T00:00:00Z'
+      },
+      {
+        prNumber: 2,
+        title: 'Test PR 2',
+        creator: 'user2',
+        creationTimestamp: '2024-01-03T00:00:00Z',
+        requestedReviewers: [],
+        lastActionType: 'merged',
+        lastActionTimestamp: '2024-01-04T00:00:00Z'
       }
     ];
 
-    const fetchMock = mock.fn(() => Promise.resolve(mockPullRequests));
-    mock.method(await import('../../services/pull-requests.service.js'), 'fetchAndNormalizePullRequests', fetchMock);
+    mock.method(axios, 'get', () => Promise.resolve(mockPullRequests));
 
     await getAllPullRequests(mockReq as Request, mockRes as Response);
 
     assert.strictEqual(statusMock.mock.callCount(), 1);
     assert.deepStrictEqual(statusMock.mock.calls[0].arguments, [200]);
     assert.strictEqual(jsonMock.mock.callCount(), 1);
-    assert.deepStrictEqual(jsonMock.mock.calls[0].arguments, [mockPullRequests]);
+    assert.deepStrictEqual(jsonMock.mock.calls[0].arguments, [expected]);
   });
 
   test('should return 500 when service throws an error', async () => {
@@ -109,8 +141,7 @@ describe('Pull Requests Handler', () => {
       query: { owner: 'testowner', repo: 'testrepo' }
     };
 
-    const fetchMock = mock.fn(() => Promise.reject(new Error('Service error')));
-    mock.method(await import('../../services/pull-requests.service.js'), 'fetchAndNormalizePullRequests', fetchMock);
+    mock.method(axios, 'get', () => Promise.reject(new Error('Network error')));
 
     await getAllPullRequests(mockReq as Request, mockRes as Response);
 
