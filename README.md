@@ -70,8 +70,9 @@ root/
 
 ## Deployment URLS
 
-1. Frontend Netlify Deployment : <https://v57-tier3-team-32.netlify.app/>
-2. Backend Render Deployment: <https://v57-tier3-team-32.onrender.com/>
+
+1. Frontend Netlify Deployment : https://v57-tier3-team-32.netlify.app/
+2. Backend Render Deployment: https://v57-tier3-team-32-x1uz.onrender.com/
 
 ## Team Documents and Channels
 
