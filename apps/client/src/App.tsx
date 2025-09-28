@@ -23,7 +23,7 @@ function HealthCheckButton() {
         onClick={() => {
           void (async () => {
             await alertHealthCheck();
-          });
+          })();
         }}
       >
         Health Check
