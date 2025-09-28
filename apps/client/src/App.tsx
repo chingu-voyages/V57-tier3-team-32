@@ -10,8 +10,8 @@ const alertHealthCheck = async () => {
     alert(
       `health check response: ${response.status} - ${JSON.stringify(response.data)}`,
     );
-  } catch {
-    console.error("health check failed");
+  } catch (error) {
+    console.error("health check failed", error);
   }
 };
 
