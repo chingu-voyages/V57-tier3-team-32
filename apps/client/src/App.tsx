@@ -1,7 +1,6 @@
 import "./App.css";
 import { healthCheck } from "./api/healthCheck";
-import { Button } from "./components/ui/button";
-
+import Button from "./components/ui/Button";
 import PRReviewHeader from "./header";
 
 const alertHealthCheck = async () => {
