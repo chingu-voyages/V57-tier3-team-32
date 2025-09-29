@@ -1,4 +1,4 @@
-import { defineConfig, globalIgnores } from "eslint/config";
+import { defineConfig } from "eslint/config";
 import reactDom from "eslint-plugin-react-dom";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
@@ -23,6 +23,5 @@ export default makeConfigFromBase(
         globals: globals.browser,
       },
     },
-    globalIgnores(["src/components/*"]),
   ]),
 );

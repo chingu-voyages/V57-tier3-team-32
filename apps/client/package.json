@@ -9,8 +9,7 @@
     "build": "tsc -b && vite build",
     "format": "prettier --write .",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "watch": "vite build --watch"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@radix-ui/react-slot": "1.2.3",
