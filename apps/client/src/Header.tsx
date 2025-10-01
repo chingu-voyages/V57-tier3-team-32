@@ -34,7 +34,7 @@ export default function PRReviewHeader() {
             PR Review Status Board
           </h2>
           <span className="text-xs sm:text-sm lg:text-base text-slate-500">
-            <CurrentDate></CurrentDate>
+            {CurrentDate()}
           </span>
         </CardContent>
       </Card>
