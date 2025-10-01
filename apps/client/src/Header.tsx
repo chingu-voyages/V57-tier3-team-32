@@ -1,6 +1,6 @@
 import { Card, CardContent } from "./components/ui/card";
 
-function CurrentDate() {
+function currentDate() {
   const currentDate = new Date();
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const months = [
@@ -34,7 +34,7 @@ export default function PRReviewHeader() {
             PR Review Status Board
           </h2>
           <span className="text-xs sm:text-sm lg:text-base text-slate-500">
-            {CurrentDate()}
+            {currentDate()}
           </span>
         </CardContent>
       </Card>
