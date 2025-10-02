@@ -20,9 +20,7 @@ function HealthCheckButton() {
       <Button
         variant="outline"
         onClick={() => {
-          void (async () => {
-            await alertHealthCheck();
-          })();
+          void alertHealthCheck();
         }}
       >
         Health Check
@@ -32,7 +30,7 @@ function HealthCheckButton() {
 }
 function App() {
   return (
-    <div className="">
+    <div>
       <div>
         <PRReviewHeader></PRReviewHeader>
       </div>

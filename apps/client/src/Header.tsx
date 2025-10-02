@@ -1,28 +1,6 @@
-import { Card, CardContent } from "./components/ui/card";
-
+import { Card, CardContent } from "./components/ui/Card";
 function currentDate() {
-  const currentDate = new Date();
-  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  const day = days[currentDate.getDay()];
-  const month = months[currentDate.getMonth()];
-  const date = currentDate.getDate();
-  const year = currentDate.getFullYear();
-
-  return `${day}, ${date} ${month} ${year}`;
+  return new Date().toDateString().replace(" ", ", ");
 }
 
 export default function PRReviewHeader() {
