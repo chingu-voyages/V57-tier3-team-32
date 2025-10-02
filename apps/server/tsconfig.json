@@ -17,5 +17,8 @@
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
     "forceConsistentCasingInFileNames": true
+  },
+  "ts-node": {
+    "logError": true
   }
 }
