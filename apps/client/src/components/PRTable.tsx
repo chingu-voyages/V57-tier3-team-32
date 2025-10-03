@@ -6,7 +6,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../components/ui/table";
+} from "./ui/table";
 
 interface PR {
   id: string;
@@ -23,6 +23,10 @@ interface PRTableProps {
 }
 
 export function PRTable({ pr }: PRTableProps) {
+  const sortedPR = [...pr].sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+  );
+
   return (
     <div className="w-full bg-white rounded-lg border border-gray-200 overflow-auto">
       <Table>
@@ -56,12 +60,12 @@ export function PRTable({ pr }: PRTableProps) {
             </TableHead>
 
             <TableHead className="font-semibold text-gray-700 py-3 min-w-[100px] hidden lg:table-cell">
-              Status
+              Last Action Date
             </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {pr.map((pullRequest) => (
+          {sortedPR.map((pullRequest) => (
             <TableRow
               key={pullRequest.id}
               className="border-b border-gray-100 hover:bg-gray-50 transition-colors"
@@ -83,11 +87,7 @@ export function PRTable({ pr }: PRTableProps) {
               </TableCell>
 
               <TableCell className="text-gray-700 py-3 min-w-[150px] hidden lg:table-cell">
-                {pullRequest.reviewers}
-              </TableCell>
-
-              <TableCell className="text-gray-700 py-3 min-w-[120px] hidden xl:table-cell">
-                {pullRequest.lastActionDate}
+                {pullRequest.reviewers.join("-")}
               </TableCell>
 
               <TableCell className="py-3 min-w-[100px] hidden lg:table-cell">
@@ -104,6 +104,9 @@ export function PRTable({ pr }: PRTableProps) {
                 >
                   {pullRequest.status}
                 </span>
+              </TableCell>
+              <TableCell className="text-gray-700 py-3 min-w-[120px] hidden xl:table-cell">
+                {pullRequest.lastActionDate}
               </TableCell>
             </TableRow>
           ))}

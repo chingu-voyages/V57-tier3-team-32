@@ -5,7 +5,6 @@ import { PRTable } from "./components/PRTable";
 import type { PR } from "../types/pr";
 import Button from "./components/ui/Button";
 
-
 const alertHealthCheck = async () => {
   try {
     const response = await healthCheck();
@@ -47,6 +46,34 @@ const testPRs: PR[] = [
     status: "Open",
     lastActionDate: "13/04/2015",
   },
+  {
+    id: "3",
+    title: "Refactor auth and middleware and add tests...3",
+    author: "My Stroudyies3",
+    createdAt: "2025-01-22",
+    updatedAt: "2025-04-20",
+    labels: [],
+    repository: "web-frontend",
+    reviewers: ["MA:telecom", "alfred"],
+    comments: 0,
+    mergeable: true,
+    status: "Open",
+    lastActionDate: "13/04/2018",
+  },
+  {
+    id: "4",
+    title: "Refactor auth and add tests...3",
+    author: "My Stroudyies4",
+    createdAt: "2025-10-22",
+    updatedAt: "2025-04-20",
+    labels: [],
+    repository: "web-frontend",
+    reviewers: ["MA:telecom", "nina"],
+    comments: 0,
+    mergeable: true,
+    status: "Open",
+    lastActionDate: "13/10/2025",
+  },
 ];
 
 function HealthCheckButton() {
@@ -65,7 +92,7 @@ function HealthCheckButton() {
 }
 
 export default function App() {
-   return (
+  return (
     <>
       <div>
         <div>
