@@ -1,4 +1,6 @@
-const { FRONTEND_URL } = process.env;
+import Env from "./env.js";
+
+const FRONTEND_URL = Env.FRONTEND_URL;
 
 if (FRONTEND_URL == undefined) {
   throw new Error("FRONTEND_URL env var not set");
