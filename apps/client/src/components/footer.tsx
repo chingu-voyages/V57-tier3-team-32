@@ -2,7 +2,6 @@ import { Card, CardContent } from "./ui/Card";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
-  // to be populated with real developers details
   const developers = [
     {
       name: "Acto",
