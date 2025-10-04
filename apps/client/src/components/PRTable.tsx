@@ -1,7 +1,6 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -22,6 +21,33 @@ interface PRTableProps {
   pr: PR[];
 }
 
+interface Column {
+  key: string;
+  label: string;
+  minWidth: string;
+  hideOn: string | null;
+}
+
+const columns: Column[] = [
+  { key: "id", label: "#PR", minWidth: "80px", hideOn: null },
+  { key: "title", label: "Title", minWidth: "200px", hideOn: null },
+  { key: "author", label: "Author", minWidth: "120px", hideOn: null },
+  { key: "created", label: "Created", minWidth: "100px", hideOn: null },
+  { key: "reviewers", label: "Reviewers", minWidth: "150px", hideOn: "lg" },
+  { key: "status", label: "Status", minWidth: "100px", hideOn: "lg" },
+  {
+    key: "lastActionDate",
+    label: "Last Action Date",
+    minWidth: "120px",
+    hideOn: "lg",
+  },
+];
+
+const getColumnClasses = (column: Column): string => {
+  const baseClasses = column.hideOn ? `hidden ${column.hideOn}:table-cell` : "";
+  return baseClasses;
+};
+
 export function PRTable({ pr }: PRTableProps) {
   const sortedPR = [...pr].sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
@@ -30,41 +56,20 @@ export function PRTable({ pr }: PRTableProps) {
   return (
     <div className="w-full bg-white rounded-lg border border-gray-200 overflow-auto">
       <Table>
-        <TableCaption className="text-gray-500 text-sm py-4">
-          List of pull requeests
-        </TableCaption>
         <TableHeader className="bg-gray-50">
           <TableRow className="border-b border-gray-200 hover:bg-transparent">
-            <TableHead className="font-semibold text-gray-700 py-3 min-w-[80px]">
-              #PR
-            </TableHead>
-
-            <TableHead className="font-semibold text-gray-700 py-3 min-w-[200px]">
-              Title
-            </TableHead>
-
-            <TableHead className="font-semibold text-gray-700 py-3 min-w-[120px]">
-              Author
-            </TableHead>
-
-            <TableHead className="font-semibold text-gray-700 py-3 min-w-[100px]">
-              Created
-            </TableHead>
-
-            <TableHead className="font-semibold text-gray-700 py-3 min-w-[150px] hidden lg:table-cell">
-              Reviewers
-            </TableHead>
-
-            <TableHead className="font-semibold text-gray-700 py-3 min-w-[120px] hidden xl:table-cell">
-              Last Action
-            </TableHead>
-
-            <TableHead className="font-semibold text-gray-700 py-3 min-w-[100px] hidden lg:table-cell">
-              Last Action Date
-            </TableHead>
+            {columns.map((column) => (
+              <TableHead
+                key={column.key}
+                className={`font-semibold text-gray-700 py-3 ${getColumnClasses(column)}`}
+                style={{ minWidth: column.minWidth }}
+              >
+                {column.label}
+              </TableHead>
+            ))}
           </TableRow>
         </TableHeader>
-        <TableBody>
+        <TableBody className="text-left">
           {sortedPR.map((pullRequest) => (
             <TableRow
               key={pullRequest.id}
