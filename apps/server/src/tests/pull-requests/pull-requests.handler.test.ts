@@ -3,14 +3,14 @@ import assert from "node:assert";
 import axios from "axios";
 import type { Request, Response } from "express";
 
-let getAllPullRequests: typeof import("../../handlers/pull-requests.handler.js").getAllPullRequests;
+let getPullRequests: typeof import("../../handlers/pull-requests.handler.js").getPullRequests;
 
 before(async () => {
   process.env.FRONTEND_URL = "https://example.com";
   process.env.PORT = "1025";
   process.env.GITHUB_API_TOKEN = "testing this";
 
-  ({ getAllPullRequests } = await import(
+  ({ getPullRequests } = await import(
     "../../handlers/pull-requests.handler.js"
   ));
 });
@@ -38,7 +38,12 @@ describe("Pull Requests Handler", () => {
 
   test("should return 200 with pull requests when all parameters are valid", async () => {
     mockReq = {
-      query: { owner: "testowner", repo: "testrepo" },
+      query: {
+        owner: "testowner",
+        repo: "testrepo",
+        state: "all",
+        assignee: "assignee1",
+      },
     };
 
     const mockPullRequests = {
@@ -50,6 +55,7 @@ describe("Pull Requests Handler", () => {
           user: { login: "user1" },
           created_at: "2024-01-01T00:00:00Z",
           requested_reviewers: [{ login: "reviewer1" }, { login: "reviewer2" }],
+          assignees: [{ login: "assignee1" }],
           merged_at: null,
           state: "open",
           updated_at: "2024-01-02T00:00:00Z",
@@ -61,6 +67,7 @@ describe("Pull Requests Handler", () => {
           user: { login: "user2" },
           created_at: "2024-01-03T00:00:00Z",
           requested_reviewers: [],
+          assignees: [{ login: "assignee1" }],
           merged_at: "2024-01-04T00:00:00Z",
           state: "closed",
           updated_at: "2024-01-04T00:00:00Z",
@@ -80,6 +87,7 @@ describe("Pull Requests Handler", () => {
           requestedReviewers: ["reviewer1", "reviewer2"],
           lastActionType: "open",
           lastActionTimestamp: "2024-01-02T00:00:00Z",
+          assignees: ["assignee1"],
         },
         {
           prNumber: 2,
@@ -90,13 +98,14 @@ describe("Pull Requests Handler", () => {
           requestedReviewers: [],
           lastActionType: "merged",
           lastActionTimestamp: "2024-01-04T00:00:00Z",
+          assignees: ["assignee1"],
         },
       ],
     };
 
     mock.method(axios, "get", () => Promise.resolve(mockPullRequests));
 
-    await getAllPullRequests(mockReq as Request, mockRes as Response);
+    await getPullRequests(mockReq as Request, mockRes as Response);
 
     assert.strictEqual(statusMock.mock.callCount(), 1);
     assert.deepStrictEqual(statusMock.mock.calls[0].arguments, [200]);
@@ -111,7 +120,7 @@ describe("Pull Requests Handler", () => {
 
     mock.method(axios, "get", () => Promise.reject(new Error("Network error")));
 
-    await getAllPullRequests(mockReq as Request, mockRes as Response);
+    await getPullRequests(mockReq as Request, mockRes as Response);
 
     assert.strictEqual(statusMock.mock.callCount(), 1);
     assert.deepStrictEqual(statusMock.mock.calls[0].arguments, [500]);
