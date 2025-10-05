@@ -5,16 +5,15 @@ export const validateParams =
   (schema: z.Schema) =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const validatedData = await schema.parseAsync(req.query);
-      req.body = validatedData;
-      next();
+      await schema.parseAsync(req.query);
+      return next();
     } catch (error) {
       if (error instanceof z.ZodError) {
-        res.status(400).json({
+        return res.status(400).json({
           error: error.issues,
         });
       } else {
-        res.status(500).json({ error: "Internal Sever Error" });
+        return res.status(500).json({ error: "Internal Sever Error" });
       }
     }
   };
