@@ -5,10 +5,16 @@ export interface PR {
   status: "Open" | "Closed" | "Merged" | "Draft";
   createdAt: string;
   updatedAt: string;
-  labels: string[];
-  repository: string;
   reviewers: string[];
-  comments: number;
-  mergeable: boolean;
   lastActionDate: string;
+}
+
+export interface ApiPullRequest {
+  prNumber: number;
+  title: string;
+  creator: string;
+  creationTimestamp: string;
+  requestedReviewers: string[];
+  lastActionType: "Open" | "Closed" | "Merged" | "Draft";
+  lastActionTimestamp: string;
 }

@@ -9,20 +9,8 @@ import {
 
 import timeAgo from "./ui/utilis";
 import { PRTableHeader } from "./ui/PRTableHeader";
-
-interface PR {
-  id: string;
-  title: string;
-  author: string;
-  status: "Open" | "Closed" | "Merged" | "Draft";
-  createdAt: string;
-  lastActionDate: string;
-  reviewers: string[];
-}
-
-interface PRTableProps {
-  pr: PR[];
-}
+import type { PR } from "types/pr";
+import { usePRContext } from "@/contexts/pull-requests.context";
 
 interface Column {
   key: string;
@@ -51,18 +39,61 @@ const getColumnClasses = (column: Column): string => {
   return baseClasses;
 };
 
-const handleRefresh = () => {
-  console.log("refresh page");
+const capitalizeFirstChar = (word: string) => {
+  return word.charAt(0).toUpperCase() + word.slice(1);
 };
 
-export function PRTable({ pr }: PRTableProps) {
-  const sortedPR = [...pr].sort(
+const getStatusStyles = (pr: PR) => {
+  const status = capitalizeFirstChar(pr.status);
+  let statusStyles = {};
+  switch (status) {
+    case "Open":
+      statusStyles = {
+        backgroundColor: "#d1fae5",
+        color: "#9ca3af",
+        border: "1px solid #bbf7d0",
+      };
+      break;
+    case "Merged":
+      statusStyles = {
+        backgroundColor: "#f3e8ff",
+        color: "#9ca3af",
+        border: "1px solid #e9d5ff",
+      };
+      break;
+    case "Draft":
+      statusStyles = {
+        backgroundColor: "#f3f4f6",
+        color: "#9ca3af",
+        border: "1px solid #e5e7eb",
+      };
+      break;
+    default:
+      statusStyles = {
+        backgroundColor: "#fee2e2",
+        color: "#991b1b",
+        border: "1px solid #fecaca",
+      };
+  }
+
+  return statusStyles;
+};
+
+export function PRTable({ prs }: { prs: PR[] }) {
+  const { refreshPullRequests } = usePRContext();
+
+  const sortedPR = [...prs].sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
   );
 
   return (
     <div className="w-full bg-white rounded-lg border border-gray-200 overflow-auto">
-      <PRTableHeader repoName="web-frontend" onRefresh={handleRefresh} />
+      <PRTableHeader
+        repoName="web-frontend"
+        onRefresh={() => {
+          void refreshPullRequests();
+        }}
+      />
       <Table>
         <TableHeader className="bg-gray-50">
           <TableRow className="border-b border-gray-200 hover:bg-transparent">
@@ -121,17 +152,10 @@ export function PRTable({ pr }: PRTableProps) {
 
               <TableCell className="py-3 min-w-[100px] hidden lg:table-cell">
                 <span
-                  className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                    pullRequest.status === "Open"
-                      ? "bg-green-100 text-gray-400 border border-green-200"
-                      : pullRequest.status === "Merged"
-                        ? "bg-purple-100 text-gray-400 border border-purple-200"
-                        : pullRequest.status === "Draft"
-                          ? "bg-gray-100 text-gray-400 border border-gray-200"
-                          : "bg-red-100 text-red-800 border border-red-200"
-                  }`}
+                  className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium`}
+                  style={getStatusStyles(pullRequest)}
                 >
-                  {pullRequest.status}
+                  {capitalizeFirstChar(pullRequest.status)}
                 </span>
               </TableCell>
               <TableCell className="text-gray-400 py-3 min-w-[120px] hidden xl:table-cell">
