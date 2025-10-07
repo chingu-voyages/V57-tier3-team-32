@@ -10,7 +10,7 @@ export async function healthCheck() {
   };
 
   try {
-    const response = await fetch(`${BASE_URL}`, options);
+    const response = await fetch(`${BASE_URL}/health`, options);
     const data = (await response.json()) as Record<string, string>;
 
     return { status: response.status, data };
