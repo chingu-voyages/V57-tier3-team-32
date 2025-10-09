@@ -4,7 +4,7 @@ type StatusFilters = {
   draft: boolean;
 };
 
-export default interface FilterSidebar {
+export interface FilterSidebarProp {
   statusFilters: StatusFilters;
   statusChange: (status: keyof StatusFilters, checked: boolean) => void;
   resetAll: () => void;
@@ -22,3 +22,14 @@ export interface MultiSelectDropdownProps {
   onChange: (selected: string[]) => void;
   placeholder?: string;
 }
+
+export interface PRRefreshBarProps {
+  organizations: string[];
+  selectedOrganizations: string[];
+  onOrganizationsChange: (organizations: string[]) => void;
+  repos: string[];
+  SelectedRepos: string[];
+  onReposChange: (repos: string[]) => void;
+}
+
+export interface CombinedProps extends FilterSidebarProp, PRRefreshBarProps {}

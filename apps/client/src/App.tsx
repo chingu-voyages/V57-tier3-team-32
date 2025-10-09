@@ -31,11 +31,17 @@ function AppContent() {
 const Sidebar = () => {
   const authors = ["john doe", "jane doe", "bob smith", "sally smith"];
   const assignees = ["sam smith", "sally smith", "bob smith", "mark smith"];
+  const organizations = ["org1", "org2", "org3", "org4"];
+  const repos = ["repo1", "repo2", "repo3", "repo4"];
   const [statusFilters, setStatusFilters] = useState({
     open: true,
     draft: true,
     closed: true,
   });
+  const [SelectedRepos, setSelectedRepos] = useState<string[]>([]);
+  const [selectedOrganizations, setSelectedOrganizations] = useState<string[]>(
+    [],
+  );
   const [selectedAuthors, setSelectedAuthors] = useState<string[]>([]);
   const [selectedAssignees, setSelectedAssignees] = useState<string[]>([]);
 
@@ -54,6 +60,8 @@ const Sidebar = () => {
     });
     setSelectedAuthors([]);
     setSelectedAssignees([]);
+    setSelectedOrganizations([]);
+    setSelectedRepos([]);
   };
   return (
     <div>
@@ -67,6 +75,12 @@ const Sidebar = () => {
         onAssigneesChange={setSelectedAssignees}
         selectedAuthors={selectedAuthors}
         selectedAssignees={selectedAssignees}
+        organizations={organizations}
+        selectedOrganizations={selectedOrganizations}
+        onOrganizationsChange={setSelectedOrganizations}
+        repos={repos}
+        SelectedRepos={SelectedRepos}
+        onReposChange={setSelectedRepos}
       />
     </div>
   );

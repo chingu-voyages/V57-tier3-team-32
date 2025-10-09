@@ -19,6 +19,7 @@ export const MultiSelectDropdown = ({
 
   //check if option is selected remove from selected array else add to the selected array
   const handleToggle = (option: string) => {
+    if (!option || typeof option !== "string") return;
     const newSelected = selected.includes(option)
       ? selected.filter((item) => item !== option)
       : [...selected, option];
