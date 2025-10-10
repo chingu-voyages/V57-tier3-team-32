@@ -79,7 +79,7 @@ const getStatusStyles = (pr: PR) => {
   return statusStyles;
 };
 
-export function PRTable({ prs }: { prs: PR[] }) {
+export function PRTable({ prs, repo }: { prs: PR[]; repo: string }) {
   const { refreshPullRequests } = usePRContext();
 
   const sortedPR = [...prs].sort(
@@ -89,7 +89,7 @@ export function PRTable({ prs }: { prs: PR[] }) {
   return (
     <div className="w-full bg-white rounded-lg border border-gray-200 overflow-auto">
       <PRTableHeader
-        repoName="web-frontend"
+        repoName={repo}
         onRefresh={() => {
           void refreshPullRequests();
         }}
@@ -118,8 +118,8 @@ export function PRTable({ prs }: { prs: PR[] }) {
                 #{pullRequest.id}
               </TableCell>
 
-              <TableCell className="font-medium py-3 min-w-[200px] text-gray-400  cursor-pointer">
-                {pullRequest.title}
+              <TableCell className="font-medium py-3 min-w-[200px] text-gray-400  cursor-pointer hover:underline">
+                <a href={pullRequest.url}>{pullRequest.title}</a>
               </TableCell>
 
               <TableCell className="text-gray-400 py-3 min-w-[120px]">

@@ -1,7 +1,7 @@
 import type { ApiPullRequest, PR } from "types/pr";
 import { fetchPullRequests } from "../api/fetch-pull-requests";
 
-function mapApiResponseToPR(prs: ApiPullRequest[]): PR[] {
+function mapApiResponseToPR(prs: ApiPullRequest["pullRequests"]): PR[] {
   if (!Array.isArray(prs)) {
     throw new Error("Invalid API response format");
   }
@@ -12,13 +12,17 @@ function mapApiResponseToPR(prs: ApiPullRequest[]): PR[] {
     author: pr.creator,
     createdAt: pr.creationTimestamp,
     updatedAt: pr.lastActionTimestamp,
-    reviewers: pr.requestedReviewers || [],
+    reviewers: pr.requestedReviewers ?? [],
     status: pr.lastActionType,
     lastActionDate: pr.lastActionTimestamp,
+    url: pr.url,
   }));
 }
 
-export async function fetchPullRequestsService(): Promise<PR[]> {
+export async function fetchPullRequestsService(): Promise<{
+  repo: string;
+  pullRequests: PR[];
+}> {
   try {
     const response = await fetchPullRequests();
 
@@ -26,7 +30,11 @@ export async function fetchPullRequestsService(): Promise<PR[]> {
       throw new Error(`Failed to fetch pull requests: ${response.status}`);
     }
 
-    return mapApiResponseToPR(response.data as unknown as ApiPullRequest[]);
+    const prs = mapApiResponseToPR(
+      response.data.pullRequests as unknown as ApiPullRequest["pullRequests"],
+    );
+
+    return { repo: response.data.repo, pullRequests: prs };
   } catch (error) {
     console.error("Error in fetchPullRequestsUseCase:", error);
     throw error;

@@ -4,7 +4,7 @@ import { PRTable } from "./components/PRTable";
 import { PRProvider, usePRContext } from "./contexts/pull-requests.context";
 
 function AppContent() {
-  const { pullRequests, isLoading, error } = usePRContext();
+  const { pullRequests, repo, isLoading, error } = usePRContext();
 
   return (
     <>
@@ -14,10 +14,12 @@ function AppContent() {
         </div>
       </div>
 
-      <div style={{ marginTop: "2rem", padding: "1rem" }}>
+      <div style={{ padding: "1rem" }}>
         {isLoading && <p>Loading pull requests...</p>}
         {error && <p style={{ color: "red" }}>Error: {error}</p>}
-        {!isLoading && !error && <PRTable prs={pullRequests} />}
+        {!isLoading && !error && (
+          <PRTable prs={pullRequests} repo={repo ?? "unknown repo"} />
+        )}
       </div>
     </>
   );
