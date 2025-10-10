@@ -16,37 +16,65 @@ export const FilterSidebar = ({
   onAssigneesChange,
   selectedAssignees,
   selectedAuthors,
-  organizations,
-  selectedOrganizations,
+  organizations = [],
+  selectedOrganizations = [],
   onOrganizationsChange,
-  repos,
-  SelectedRepos,
+  repos = [],
+  SelectedRepos = [],
   onReposChange,
+  onClose,
+  showOrgRepos,
 }: CombinedProps) => {
   return (
     <div className="p-3 space-y-3">
-      <PRRefreshBar
-        organizations={organizations}
-        selectedOrganizations={selectedOrganizations}
-        onOrganizationsChange={onOrganizationsChange}
-        repos={repos}
-        SelectedRepos={SelectedRepos}
-        onReposChange={onReposChange}
-      />
-      <Card className="w-70  border-r border-border p-6">
+      <div className="hidden md:block">
+        <PRRefreshBar
+          organizations={organizations}
+          selectedOrganizations={selectedOrganizations}
+          onOrganizationsChange={onOrganizationsChange}
+          repos={repos}
+          SelectedRepos={SelectedRepos}
+          onReposChange={onReposChange}
+        />
+      </div>
+      <Card className="w-full md:w-70  md:border-r border-border p-3 md:p-6">
         <div className="flex items-center justify-between">
           <h3 className="font-semibold text-2xl">Filter</h3>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={resetAll}
-            className="h-8 text-xs"
-          >
-            Reset All
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={resetAll}
+              className="h-8 text-xs"
+            >
+              Reset All
+            </Button>
+            {onClose && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={onClose}
+                className="h-8 text-xs md:hidden"
+              >
+                Close
+              </Button>
+            )}
+          </div>
         </div>
 
         <div className="space-y-4">
+          {showOrgRepos && (
+            <>
+              <PRRefreshBar
+                organizations={organizations}
+                selectedOrganizations={selectedOrganizations}
+                onOrganizationsChange={onOrganizationsChange}
+                repos={repos}
+                SelectedRepos={SelectedRepos}
+                onReposChange={onReposChange}
+              />
+            </>
+          )}
           <div className="">
             <h4 className="font-medium text-sm mb-3 text-left">Status</h4>
             <div className="space-y-2.5 px-4">

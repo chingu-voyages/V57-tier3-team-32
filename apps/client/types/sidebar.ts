@@ -14,6 +14,8 @@ export interface FilterSidebarProp {
   assignees: string[];
   selectedAssignees: string[];
   onAssigneesChange: (assignees: string[]) => void;
+  onClose?: () => void;
+  showOrgRepos?: boolean;
 }
 
 export interface MultiSelectDropdownProps {
