@@ -5,6 +5,7 @@ WORKDIR /home/node/app/
 
 # defined as additional_context
 COPY --from=monorepo-root package*.json .npmrc ./
+COPY --from=monorepo-root scripts/prepare.js scripts/
 COPY package.json apps/client/
 RUN npm ci --workspace=@pr-viewer/client
 
