@@ -20,19 +20,19 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20.17'
+          node-version: "20.19"
 
       - name: Install dependencies
         run: npm ci
-      - name: Run lint
-        run: npm run lint --workspace=@pr-viewer/client
-      
-      - name: Lint
-        run: npm run all:lint
-      
+
+      - name: Run lint on client
+        run: npm run client:lint
+
+      - name: Run lint on server
+        run: npm run server:lint
+
       - name: Format check
-        run: npm run all:format:check
+        run: npm run all:format
 
       - name: Test
-        run: npm run all:test
-
+        run: npm run server:test
