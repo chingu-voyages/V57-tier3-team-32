@@ -12,6 +12,7 @@ import type { PR } from "types/pr";
 
 interface PRContextType {
   pullRequests: PR[];
+  repo: string | null;
   isLoading: boolean;
   error: string | null;
   refreshPullRequests: () => Promise<void>;
@@ -25,6 +26,7 @@ interface PRProviderProps {
 
 export function PRProvider({ children }: PRProviderProps) {
   const [pullRequests, setPullRequests] = useState<PR[]>([]);
+  const [repo, setRepo] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -33,8 +35,9 @@ export function PRProvider({ children }: PRProviderProps) {
     setError(null);
 
     try {
-      const prs = await fetchPullRequestsService();
-      setPullRequests(prs);
+      const data = await fetchPullRequestsService();
+      setPullRequests(data.pullRequests);
+      setRepo(data.repo);
     } catch (err) {
       const errorMessage =
         err instanceof Error ? err.message : "Failed to fetch pull requests";
@@ -52,11 +55,12 @@ export function PRProvider({ children }: PRProviderProps) {
   const value = useMemo(
     () => ({
       pullRequests,
+      repo,
       isLoading,
       error,
       refreshPullRequests,
     }),
-    [pullRequests, isLoading, error, refreshPullRequests],
+    [pullRequests, repo, isLoading, error, refreshPullRequests],
   );
 
   return <PRContext value={value}>{children}</PRContext>;
