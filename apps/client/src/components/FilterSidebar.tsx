@@ -26,16 +26,16 @@ export const FilterSidebar = ({
   showOrgRepos,
 }: CombinedProps) => {
   return (
-    <div className="p-3 space-y-3">
+    <div className="p-3 space-y-3 ">
       <div className="hidden md:block">
-        <PRRefreshBar
+        {/* <PRRefreshBar
           organizations={organizations}
           selectedOrganizations={selectedOrganizations}
           onOrganizationsChange={onOrganizationsChange}
           repos={repos}
           SelectedRepos={SelectedRepos}
           onReposChange={onReposChange}
-        />
+        /> */}
       </div>
       <Card className="w-full md:w-70  md:border-r border-border p-3 md:p-6">
         <div className="flex items-center justify-between">

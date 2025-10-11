@@ -10,28 +10,7 @@ import { Filter, RefreshCw } from "lucide-react";
 import { Card } from "./components/ui/Card";
 import Button  from "./components/ui/Button";
 
-function AppContent() {
-  const { pullRequests, repo, isLoading, error } = usePRContext();
-  return (
-    <div className="min-h-screen flex flex-col">
-      <div>
-        <div>
-          <PRReviewHeader></PRReviewHeader>
-        </div>
-      </div>
 
-      <div style={{ padding: "1rem" }} className="flex-1">
-        {isLoading && <p>Loading pull requests...</p>}
-        {error && <p style={{ color: "red" }}>Error: {error}</p>}
-        {!isLoading && !error && (
-          <PRTable prs={pullRequests} repo={repo ?? "unknown repo"} />
-        )}
-      </div>
-
-      <Footer />
-    </div>
-  );
-}
 
 
 const Sidebar = () => {
@@ -133,11 +112,41 @@ const Sidebar = () => {
     </>
   );
 };
+
+function AppContent() {
+  const { pullRequests, repo, isLoading, error } = usePRContext();
+  return (
+    <div className="min-h-screen flex flex-col">
+      <div>
+        <div>
+          <PRReviewHeader></PRReviewHeader>
+        </div>
+      </div>
+
+      <div className="flex flex-col md:flex-row">
+        <div className="md:flex-shrink-0">
+          <Sidebar />
+        </div>
+        <div style={{ padding: "1rem" }} className="flex-1">
+          {isLoading && <p>Loading pull requests...</p>}
+          {error && <p style={{ color: "red" }}>Error: {error}</p>}
+          {!isLoading && !error && (
+            <PRTable prs={pullRequests} repo={repo ?? "unknown repo"} />
+          )}
+        </div>
+      </div>
+
+      <Footer />
+    </div>
+  );
+}
+
+
 export default function App() {
   return (
-    <PRProvider>
-      <AppContent />
-      <Sidebar></Sidebar>
-    </PRProvider>
+      <PRProvider>
+        <AppContent />
+
+      </PRProvider>
   );
 }
