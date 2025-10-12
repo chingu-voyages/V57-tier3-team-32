@@ -9,7 +9,7 @@ export async function getPullRequests(
   const token = Env.GITHUB_API_TOKEN;
   const owner = req.query.owner as string;
   const repo = req.query.repo as string;
-  const state = req.query.state as string;
+  const state = (req.query.state as string) || "all";
   const creator = req.query.creator as string | undefined;
   const assignee = req.query.assignee as string | undefined;
 

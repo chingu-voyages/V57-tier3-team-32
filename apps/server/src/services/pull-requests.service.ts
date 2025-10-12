@@ -14,11 +14,7 @@ export async function fetchAndNormalizePullRequests(
   creator?: string,
   assignee?: string,
 ): Promise<NormalizedPR> {
-  let url = `https://api.github.com/repos/${owner}/${repo}/pulls?state=${state}`;
-
-  if (creator) {
-    url += `&creator=${creator}`;
-  }
+  const url = `https://api.github.com/repos/${owner}/${repo}/pulls?state=${state}`;
 
   try {
     const response = await axios.get<PR[]>(url, {
@@ -44,8 +40,11 @@ export async function fetchAndNormalizePullRequests(
 
     let filteredPRs = prs;
 
+    if (creator) {
+      filteredPRs = filteredPRs.filter((pr) => pr.creator === creator);
+    }
     if (assignee) {
-      filteredPRs = prs.filter((pr) => pr.assignees.includes(assignee));
+      filteredPRs = filteredPRs.filter((pr) => pr.assignees.includes(assignee));
     }
 
     return { repo: `${owner}/${repo}`, pullRequests: filteredPRs };
