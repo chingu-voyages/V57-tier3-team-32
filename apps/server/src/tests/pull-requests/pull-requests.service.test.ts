@@ -18,6 +18,7 @@ describe("Pull Requests Service", () => {
         {
           number: 1,
           title: "Test PR 1",
+          html_url: "https://example.com/test-pr-1",
           user: { login: "user1" },
           created_at: "2024-01-01T00:00:00Z",
           requested_reviewers: [{ login: "reviewer1" }, { login: "reviewer2" }],
@@ -28,6 +29,7 @@ describe("Pull Requests Service", () => {
         {
           number: 2,
           title: "Test PR 2",
+          html_url: "https://example.com/test-pr-2",
           user: { login: "user2" },
           created_at: "2024-01-03T00:00:00Z",
           requested_reviewers: [],
@@ -61,26 +63,31 @@ describe("Pull Requests Service", () => {
       },
     ]);
 
-    const expected = [
-      {
-        prNumber: 1,
-        title: "Test PR 1",
-        creator: "user1",
-        creationTimestamp: "2024-01-01T00:00:00Z",
-        requestedReviewers: ["reviewer1", "reviewer2"],
-        lastActionType: "open",
-        lastActionTimestamp: "2024-01-02T00:00:00Z",
-      },
-      {
-        prNumber: 2,
-        title: "Test PR 2",
-        creator: "user2",
-        creationTimestamp: "2024-01-03T00:00:00Z",
-        requestedReviewers: [],
-        lastActionType: "merged",
-        lastActionTimestamp: "2024-01-04T00:00:00Z",
-      },
-    ];
+    const expected = {
+      repo: "testowner/testrepo",
+      pullRequests: [
+        {
+          prNumber: 1,
+          title: "Test PR 1",
+          url: "https://example.com/test-pr-1",
+          creator: "user1",
+          creationTimestamp: "2024-01-01T00:00:00Z",
+          requestedReviewers: ["reviewer1", "reviewer2"],
+          lastActionType: "open",
+          lastActionTimestamp: "2024-01-02T00:00:00Z",
+        },
+        {
+          prNumber: 2,
+          title: "Test PR 2",
+          url: "https://example.com/test-pr-2",
+          creator: "user2",
+          creationTimestamp: "2024-01-03T00:00:00Z",
+          requestedReviewers: [],
+          lastActionType: "merged",
+          lastActionTimestamp: "2024-01-04T00:00:00Z",
+        },
+      ],
+    };
 
     assert.deepStrictEqual(result, expected);
   });
@@ -114,6 +121,9 @@ describe("Pull Requests Service", () => {
       "all",
     );
 
-    assert.deepStrictEqual(result, []);
+    assert.deepStrictEqual(result, {
+      repo: "testowner/testrepo",
+      pullRequests: [],
+    });
   });
 });
