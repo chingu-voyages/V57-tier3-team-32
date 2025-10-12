@@ -7,9 +7,9 @@ const repoOwnerSchema = z.object({
     .min(1, {
       error: (iss) => {
         if (iss.input === undefined) {
-          return `Missing Query Parameter repo`;
+          return "Missing Query Parameter repo";
         } else {
-          return `Invalid Query Parameter repo`;
+          return "Invalid Query Parameter repo";
         }
       },
     }),
@@ -19,9 +19,9 @@ const repoOwnerSchema = z.object({
     .min(1, {
       error: (iss) => {
         if (iss.input === undefined) {
-          return `Missing Query Parameter owner`;
+          return "Missing Query Parameter owner";
         } else {
-          return `Invalid Query Parameter owner`;
+          return "Invalid Query Parameter owner";
         }
       },
     }),
@@ -29,13 +29,19 @@ const repoOwnerSchema = z.object({
     .enum(["open", "closed", "all"], {
       error: (iss) => {
         if (iss.input === undefined) {
-          return `Missing Query Parameter state`;
+          return "Missing Query Parameter state";
         } else {
           return `Invalid Query Parameter state. Expected ${iss.values.join(", ")}`;
         }
       },
     })
     .default("all"),
+  creator: z.optional(
+    z.string().trim().min(1, `Invalid Query Parameter creator`),
+  ),
+  assignee: z.optional(
+    z.string().trim().min(1, `Invalid Query Parameter creator`),
+  ),
 });
 
 export default repoOwnerSchema;
