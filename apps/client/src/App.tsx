@@ -1,43 +1,34 @@
 import "./App.css";
-import { healthCheck } from "./api/healthCheck";
 import PRReviewHeader from "./Header";
-import Button from "./components/ui/Button";
+import { PRTable } from "./components/PRTable";
+import { PRProvider, usePRContext } from "./contexts/pull-requests.context";
 
-const alertHealthCheck = async () => {
-  try {
-    const response = await healthCheck();
-    alert(
-      `health check response: ${response.status} - ${JSON.stringify(response.data)}`,
-    );
-  } catch (error) {
-    console.error("health check failed", error);
-  }
-};
+function AppContent() {
+  const { pullRequests, repo, isLoading, error } = usePRContext();
 
-function HealthCheckButton() {
   return (
-    <div className="block">
-      <Button
-        variant="outline"
-        onClick={() => {
-          void alertHealthCheck();
-        }}
-      >
-        Health Check
-      </Button>
-    </div>
-  );
-}
-function App() {
-  return (
-    <div>
+    <>
       <div>
-        <PRReviewHeader></PRReviewHeader>
+        <div>
+          <PRReviewHeader></PRReviewHeader>
+        </div>
       </div>
 
-      <HealthCheckButton></HealthCheckButton>
-    </div>
+      <div style={{ padding: "1rem" }}>
+        {isLoading && <p>Loading pull requests...</p>}
+        {error && <p style={{ color: "red" }}>Error: {error}</p>}
+        {!isLoading && !error && (
+          <PRTable prs={pullRequests} repo={repo ?? "unknown repo"} />
+        )}
+      </div>
+    </>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <PRProvider>
+      <AppContent />
+    </PRProvider>
+  );
+}

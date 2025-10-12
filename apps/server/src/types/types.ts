@@ -358,4 +358,15 @@ export interface Commits {
 
 export interface Statuses {
   href: string;
+  repo: string;
+  pullRequests: {
+    prNumber: number;
+    title: string;
+    creator: string;
+    creationTimestamp: string;
+    requestedReviewers: string[];
+    lastActionType: string;
+    lastActionTimestamp: string;
+    url: string;
+  }[];
 }
