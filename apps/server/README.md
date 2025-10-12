@@ -14,6 +14,7 @@ Fetches all pull requests (open, closed, and merged) from a GitHub repository an
 | --------- | ------ | -------- | ----------------------------------------- |
 | `owner`   | string | Yes      | GitHub repository owner/organization name |
 | `repo`    | string | Yes      | GitHub repository name                    |
+| `state`   | string | Yes      | GitHub repository pull requests state     |
 
 ### Headers
 

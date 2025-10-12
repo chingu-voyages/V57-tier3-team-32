@@ -9,11 +9,12 @@ export const validateParams =
       return next();
     } catch (error) {
       if (error instanceof z.ZodError) {
-        return res.status(400).json({
-          error: error.issues,
+        const messages = error.issues.map((err) => err.message);
+        return res.status(422).json({
+          error: messages,
         });
       } else {
-        return res.status(500).json({ error: "Internal Sever Error" });
+        return res.status(500).json({ error: "Internal Server Error" });
       }
     }
   };

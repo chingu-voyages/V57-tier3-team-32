@@ -5,8 +5,9 @@ export const fetchAndNormalizePullRequests = async (
   owner: string,
   repo: string,
   token: string,
+  state: string,
 ): Promise<NormalizedPR[]> => {
-  const url = `https://api.github.com/repos/${owner}/${repo}/pulls?state=all`;
+  const url = `https://api.github.com/repos/${owner}/${repo}/pulls?state=${state}`;
 
   try {
     const response = await axios.get<PR[]>(url, {

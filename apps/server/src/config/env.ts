@@ -1,14 +1,15 @@
 import z from "zod";
+import dotenv from "dotenv";
+dotenv.config();
 
 const envSchema = z.object({
   FRONTEND_URL: z.string(),
   PORT: z
     .string()
     .refine(
-      (PORT) => parseInt(PORT) > 0 && parseInt(PORT) < 65536,
-      "Invalid Port Number",
-    )
-    .default("8080"),
+      (PORT) => Number(PORT) > 1024 && Number(PORT) < 49151,
+      "INVALID PORT NUMBER",
+    ),
   GITHUB_API_TOKEN: z
     .string()
     .refine(
