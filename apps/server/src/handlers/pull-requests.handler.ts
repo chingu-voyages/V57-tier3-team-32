@@ -11,11 +11,6 @@ export async function getAllPullRequests(
   const repo = req.query.repo as string;
   const state = req.query.state as string;
 
-  if (!token || !owner || !repo) {
-    res.status(500).json({ error: "Missing environment variables." });
-    return;
-  }
-
   try {
     const pullRequests = await fetchAndNormalizePullRequests(
       owner,

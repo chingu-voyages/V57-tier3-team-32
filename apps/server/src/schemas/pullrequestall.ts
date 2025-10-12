@@ -1,24 +1,30 @@
 import z from "zod";
 
 const repoOwnerSchema = z.object({
-  repo: z.string({
-    error: (iss) => {
-      if (iss.input === undefined) {
-        return `Missing Query Parameter repo`;
-      } else {
-        return `Invalid Query Parameter repo`;
-      }
-    },
-  }),
-  owner: z.string({
-    error: (iss) => {
-      if (iss.input === undefined) {
-        return `Missing Query Parameter owner`;
-      } else {
-        return `Invalid Query Parameter owner`;
-      }
-    },
-  }),
+  repo: z
+    .string()
+    .trim()
+    .min(1, {
+      error: (iss) => {
+        if (iss.input === undefined) {
+          return `Missing Query Parameter repo`;
+        } else {
+          return `Invalid Query Parameter repo`;
+        }
+      },
+    }),
+  owner: z
+    .string()
+    .trim()
+    .min(1, {
+      error: (iss) => {
+        if (iss.input === undefined) {
+          return `Missing Query Parameter owner`;
+        } else {
+          return `Invalid Query Parameter owner`;
+        }
+      },
+    }),
   state: z
     .enum(["open", "closed", "all"], {
       error: (iss) => {
