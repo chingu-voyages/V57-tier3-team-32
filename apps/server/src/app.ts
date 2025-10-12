@@ -14,7 +14,7 @@ app.use(function logIncomingRequests(req, _, next) {
   next();
 });
 
-app.use('/api/v1', router);
+app.use("/api/v1", router);
 
 app.get("/health", function (_, res) {
   // changed to json for testing

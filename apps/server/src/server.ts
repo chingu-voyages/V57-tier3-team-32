@@ -1,6 +1,7 @@
 import app from "./app.js";
+import Env from "./config/env.js";
 
-const { PORT } = process.env;
+const PORT = Env.PORT;
 if (PORT == undefined) {
   throw new Error("PORT env var not set");
 }

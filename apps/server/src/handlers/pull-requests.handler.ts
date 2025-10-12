@@ -1,28 +1,27 @@
 import type { Request, Response } from "express";
 import { fetchAndNormalizePullRequests } from "../services/pull-requests.service.js";
-import "dotenv/config";
+import Env from "../config/env.js";
 
-export const getAllPullRequests = async (
+export async function getAllPullRequests(
   req: Request,
   res: Response,
-): Promise<void> => {
-  const token = process.env.GITHUB_API_TOKEN;
+): Promise<void> {
+  const token = Env.GITHUB_API_TOKEN;
   const owner = req.query.owner as string;
   const repo = req.query.repo as string;
-
-  if (!token || !owner || !repo) {
-    res.status(500).json({ error: "Missing environment variables." });
-    return;
-  }
+  const state = req.query.state as string;
 
   try {
     const pullRequests = await fetchAndNormalizePullRequests(
       owner,
       repo,
       token,
+      state,
     );
+
     res.status(200).json(pullRequests);
   } catch {
     res.status(500).json({ error: "Internal server error." });
+    return;
   }
-};
+}
