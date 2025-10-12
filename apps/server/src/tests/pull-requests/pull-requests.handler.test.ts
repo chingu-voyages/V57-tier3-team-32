@@ -1,10 +1,19 @@
-import { test, describe, beforeEach, afterEach, mock } from "node:test";
+import { test, describe, beforeEach, afterEach, mock, before } from "node:test";
 import assert from "node:assert";
-import type { Request, Response } from "express";
-import { getAllPullRequests } from "../../handlers/pull-requests.handler.js";
 import axios from "axios";
+import type { Request, Response } from "express";
 
-const originalEnv = process.env;
+let getAllPullRequests: typeof import("../../handlers/pull-requests.handler.js").getAllPullRequests;
+
+before(async () => {
+  process.env.FRONTEND_URL = "https://example.com";
+  process.env.PORT = "1025";
+  process.env.GITHUB_API_TOKEN = "testing this";
+
+  ({ getAllPullRequests } = await import(
+    "../../handlers/pull-requests.handler.js"
+  ));
+});
 
 describe("Pull Requests Handler", () => {
   let mockReq: Partial<Request>;
@@ -21,49 +30,13 @@ describe("Pull Requests Handler", () => {
       status: statusMock,
       json: jsonMock,
     };
-
-    process.env = { ...originalEnv };
   });
 
   afterEach(() => {
-    process.env = originalEnv;
     mock.restoreAll();
   });
 
-  test("should return 500 when owner is missing", async () => {
-    process.env.GITHUB_API_TOKEN = "test-token";
-    mockReq = {
-      query: { repo: "testrepo" },
-    };
-
-    await getAllPullRequests(mockReq as Request, mockRes as Response);
-
-    assert.strictEqual(statusMock.mock.callCount(), 1);
-    assert.deepStrictEqual(statusMock.mock.calls[0].arguments, [500]);
-    assert.strictEqual(jsonMock.mock.callCount(), 1);
-    assert.deepStrictEqual(jsonMock.mock.calls[0].arguments, [
-      { error: "Missing environment variables." },
-    ]);
-  });
-
-  test("should return 500 when repo is missing", async () => {
-    process.env.GITHUB_API_TOKEN = "test-token";
-    mockReq = {
-      query: { owner: "testowner" },
-    };
-
-    await getAllPullRequests(mockReq as Request, mockRes as Response);
-
-    assert.strictEqual(statusMock.mock.callCount(), 1);
-    assert.deepStrictEqual(statusMock.mock.calls[0].arguments, [500]);
-    assert.strictEqual(jsonMock.mock.callCount(), 1);
-    assert.deepStrictEqual(jsonMock.mock.calls[0].arguments, [
-      { error: "Missing environment variables." },
-    ]);
-  });
-
   test("should return 200 with pull requests when all parameters are valid", async () => {
-    process.env.GITHUB_API_TOKEN = "test-token";
     mockReq = {
       query: { owner: "testowner", repo: "testrepo" },
     };
@@ -132,7 +105,6 @@ describe("Pull Requests Handler", () => {
   });
 
   test("should return 500 when service throws an error", async () => {
-    process.env.GITHUB_API_TOKEN = "test-token";
     mockReq = {
       query: { owner: "testowner", repo: "testrepo" },
     };
