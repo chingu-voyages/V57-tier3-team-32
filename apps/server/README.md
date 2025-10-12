@@ -144,4 +144,3 @@ curl "https://your-api-domain.com/pull-requests?owner=facebook&repo=react"
 
 - **axios**: For HTTP requests to GitHub API
 - **express**: Web framework for handling requests
-- **dotenv**: For environment variable management
