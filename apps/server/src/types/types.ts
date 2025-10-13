@@ -9,6 +9,7 @@ export interface NormalizedPR {
     lastActionType: string;
     lastActionTimestamp: string;
     url: string;
+    assignees: string[];
   }[];
 }
 
