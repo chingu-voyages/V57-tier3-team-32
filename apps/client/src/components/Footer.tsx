@@ -1,28 +1,29 @@
 import { Card, CardContent } from "./ui/Card";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
+const developers = [
+  {
+    name: "Acto",
+    github: "https://github.com/acto-acto",
+    linkedIn: "https://www.linkedin.com/in/thankgod-obobo-66ba28271",
+  },
+  { name: "Nadeem", github: "https://github.com/707" },
+  { name: "Snowbytes", github: "https://github.com/snowbytes" },
+  {
+    name: "Devim",
+    github: "https://github.com/devimalka",
+    linkedIn: "https://linkedin.com/in/oshada-kularathne/",
+  },
+  {
+    name: "BettyC",
+    github: "https://github.com/BettyC2002",
+    linkedIn: "https://www.linkedin.com/in/bethrand-patience-131544333",
+  },
+  { name: "theDevGuy578", github: "https://github.com/LMgit91" },
+  { name: "Alexander", github: "https://github.com/reckless" },
+];
+
 const Footer = () => {
-  const developers = [
-    {
-      name: "Acto",
-      github: "https://github.com/acto-acto",
-      linkedIn: "https://www.linkedin.com/in/thankgod-obobo-66ba28271",
-    },
-    { name: "Nadeem", github: "https://github.com/707" },
-    { name: "Snowbytes", github: "https://github.com/snowbytes" },
-    {
-      name: "Devim",
-      github: "https://github.com/devimalka",
-      linkedIn: "https://linkedin.com/in/oshada-kularathne/",
-    },
-    {
-      name: "BettyC",
-      github: "https://github.com/BettyC2002",
-      linkedIn: "https://www.linkedin.com/in/bethrand-patience-131544333",
-    },
-    { name: "theDevGuy578", github: "https://github.com/LMgit91" },
-    { name: "Alexander", github: "https://github.com/reckless" },
-  ];
   return (
     <footer className="w-full  top-0  bg-white  border-slate-200 p-3 pt-8">
       <Card className="rounded-2xl  border-0 outline outline-gray-200 ">

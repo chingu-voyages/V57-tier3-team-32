@@ -2,12 +2,11 @@ import "./App.css";
 import PRReviewHeader from "./Header";
 import { PRTable } from "./components/PRTable";
 import { PRProvider, usePRContext } from "./contexts/pull-requests.context";
-import Footer from "./components/footer"
+import Footer from "./components/Footer";
 
 function AppContent() {
   const { pullRequests, repo, isLoading, error } = usePRContext();
   return (
-
     <div className="min-h-screen flex flex-col">
       <div>
         <div>
@@ -22,10 +21,9 @@ function AppContent() {
           <PRTable prs={pullRequests} repo={repo ?? "unknown repo"} />
         )}
       </div>
-    
+
       <Footer />
     </div>
-    
   );
 }
 
