@@ -1,10 +1,13 @@
-# TBD Product Name
+# PR Status Board
 
-Welcome to the TDB Name! This web application helps development teams track their GitHub PRs clearly and customizably.
+Welcome to the PR Status Board! This web application tracks current PRs waiting for review as well as the history of PRs completed by the team.
 
 ## Tech stack
 
-TDB
+- **Languages**: [Typescript](https://www.typescriptlang.org)
+- **Frontend**: [React](https://react.dev/), [Shadcn/UI](https://ui.shadcn.com/), [Tailwind](https://tailwindcss.com).
+- **Backend**: [Node.js](https://nodejs.org), [Express.js](https://expressjs.com/)
+- **Infra**: [Docker](https://www.docker.com), [Github Actions](https://github.com/features/actions)
 
 ## Repo Structure
 
@@ -70,8 +73,8 @@ root/
 
 ## Deployment URLS
 
-1. Frontend Netlify Deployment : https://v57-tier3-team-32.netlify.app/
-2. Backend Render Deployment: https://v57-tier3-team-32-x1uz.onrender.com/
+1. Frontend Netlify Deployment : <https://v57-tier3-team-32.netlify.app/>
+2. Backend Render Deployment: <https://v57-tier3-team-32-x1uz.onrender.com/>
 
 ## Team Documents and Channels
 
@@ -81,15 +84,10 @@ root/
 
 ## Our Team
 
-Everyone on your team should add their name along with a link to their GitHub
-& optionally their LinkedIn profiles below. Do this in Sprint #1 to validate
-your repo access and to practice PR'ing with your team _before_ you start
-coding!
-
 - Acto: [GitHub](https://github.com/acto-acto) / [LinkedIn](https://www.linkedin.com/in/thankgod-obobo-66ba28271/)
+- Alexander: [GitHub](https://github.com/reckless)
+- BettyC: [GitHub](https://github.com/BettyC2002) / [LinkedIn](https://www.linkedin.com/in/bethrand-patience-131544333)
+- devim: [GitHub](https://github.com/devimalka) / [LinkedIn](https://linkedin.com/in/oshada-kularathne/)
 - Nadeem: [GitHub](https://github.com/707)
 - snowbytes: [Github](https://github.com/snowbytes)
-- devim: [GitHub](https://github.com/devimalka) / [LinkedIn](https://linkedin.com/in/oshada-kularathne/)
-- BettyC: [GitHub](https://github.com/BettyC2002) / [LinkedIn](https://www.linkedin.com/in/bethrand-patience-131544333)
 - theDevGuy578: [GitHub](https://github.com/LMgit91)
-- Alexander: [GitHub](https://github.com/reckless)
