@@ -70,7 +70,6 @@ root/
 
 ## Deployment URLS
 
-
 1. Frontend Netlify Deployment : https://v57-tier3-team-32.netlify.app/
 2. Backend Render Deployment: https://v57-tier3-team-32-x1uz.onrender.com/
 
@@ -93,3 +92,4 @@ coding!
 - devim: [GitHub](https://github.com/devimalka) / [LinkedIn](https://linkedin.com/in/oshada-kularathne/)
 - BettyC: [GitHub](https://github.com/BettyC2002) / [LinkedIn](https://www.linkedin.com/in/bethrand-patience-131544333)
 - theDevGuy578: [GitHub](https://github.com/LMgit91)
+- Alexander: [GitHub](https://github.com/reckless)
