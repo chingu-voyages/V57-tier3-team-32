@@ -2,6 +2,7 @@ type StatusFilters = {
   open: boolean;
   closed: boolean;
   draft: boolean;
+  merged: boolean;
 };
 
 export interface FilterSidebarProp {
@@ -11,11 +12,11 @@ export interface FilterSidebarProp {
   authors: string[];
   selectedAuthors: string[];
   onAuthorsChange: (authors: string[]) => void;
-  assignees: string[];
-  selectedAssignees: string[];
-  onAssigneesChange: (assignees: string[]) => void;
+  reviewers: string[];
+  selectedReviewers: string[];
+  onReviewersChange: (reviewers: string[]) => void;
   onClose?: () => void;
-  showOrgRepos?: boolean;
+  // showOrgRepos?: boolean;
 }
 
 export interface MultiSelectDropdownProps {
@@ -25,13 +26,11 @@ export interface MultiSelectDropdownProps {
   placeholder?: string;
 }
 
-export interface PRRefreshBarProps {
-  organizations: string[];
-  selectedOrganizations: string[];
-  onOrganizationsChange: (organizations: string[]) => void;
-  repos: string[];
-  SelectedRepos: string[];
-  onReposChange: (repos: string[]) => void;
-}
-
-export interface CombinedProps extends FilterSidebarProp, PRRefreshBarProps {}
+// export interface PRRefreshBarProps {
+//   organizations: string[];
+//   selectedOrganizations: string[];
+//   onOrganizationsChange: (organizations: string[]) => void;
+//   repos: string[];
+//   SelectedRepos: string[];
+//   onReposChange: (repos: string[]) => void;
+// }
