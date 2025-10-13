@@ -1,0 +1,9 @@
+node_modules/
+dist/
+
+.env
+.env.*
+!.env.example
+
+# files and folders that accidentally slipped before
+.early.coverage/

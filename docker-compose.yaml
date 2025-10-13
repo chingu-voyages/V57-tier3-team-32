@@ -1,0 +1,52 @@
+services:
+  web:
+    container_name: web
+    command: ["npm", "run", "client:dev", "--", "--", "--host"]
+    build:
+      target: base
+      dockerfile: Dockerfile
+      context: apps/client/
+      additional_contexts:
+        - monorepo-root=./
+    environment:
+      # live reload features do not work (especially in windows envs)
+      # because of an OS issue where the file watchers cannot pick up
+      # fs events due to differing file systems.
+      # we resolve it by instructing the underlying file watchers
+      # behind dev servers to use polling instead (such as nodemon -L). see:
+      # https://github.com/privatenumber/tsx/issues/266#issuecomment-1638530253
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ./apps/client/:/home/node/app/apps/client/
+      - /home/node/app/apps/client/node_modules/
+    ports:
+      - "${CLIENT_PORT}:${CLIENT_PORT}"
+    networks:
+      - shared-net
+    depends_on:
+      - server
+    restart: unless-stopped
+
+  server:
+    container_name: server
+    # see https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#handling-kernel-signals
+    init: true
+    build:
+      target: base
+      dockerfile: Dockerfile
+      context: apps/server/
+      additional_contexts:
+        - monorepo-root=./
+    command: ["npm", "run", "server:dev", "--", "--", "-L"]
+    volumes:
+      - ./apps/server/:/home/node/app/apps/server/
+      - /home/node/app/apps/server/node_modules/
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    networks:
+      - shared-net
+    restart: unless-stopped
+
+networks:
+  shared-net:
+    driver: bridge

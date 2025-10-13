@@ -1,0 +1,35 @@
+{
+  "name": "@pr-viewer/server",
+  "private": true,
+  "version": "1.0.0",
+  "description": "backend API server for the PR Viewer project",
+  "type": "module",
+  "main": "src/server.js",
+  "engines": {
+    "node": "^20.13.0 || >= v22.0.0"
+  },
+  "scripts": {
+    "dev": "dotenvx run -- nodemon src/server.ts",
+    "test": "node --test --no-warnings=ExperimentalWarning --loader ts-node/esm src/**/*.{spec,test}.ts",
+    "test:watch": "node --test --watch --no-warnings=ExperimentalWarning --loader ts-node/esm src/**/*.{spec,test}.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "format": "prettier . --write",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "axios": "1.12.2",
+    "cors": "2.8.5",
+    "express": "5.1.0",
+    "zod": "4.1.11"
+  },
+  "devDependencies": {
+    "@dotenvx/dotenvx": "1.49.0",
+    "@types/cors": "2.8.19",
+    "@types/express": "5.0.3",
+    "eslint-plugin-n": "17.23.0",
+    "nodemon": "3.1.10",
+    "ts-node": "10.9.2",
+    "typescript": "5.9.2"
+  }
+}
