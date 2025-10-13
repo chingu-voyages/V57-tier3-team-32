@@ -28,10 +28,7 @@ describe("Pull Requests Handler", () => {
     mock.restoreAll();
 
     resMock = {
-      // TODO: add lint exception to variables starting with _
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       status: mock.fn((_code: number) => resMock) as Mock<Response["status"]>,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       json: mock.fn((_body: unknown) => resMock) as Mock<Response["json"]>,
     };
   });

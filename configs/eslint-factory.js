@@ -38,7 +38,11 @@ export function makeConfigFromBase(appConfigs = []) {
         "no-console": ["error", { allow: ["error", "warn", "info"] }],
         "@typescript-eslint/no-unused-vars": [
           "error",
-          { args: "after-used", destructuredArrayIgnorePattern: "^_" },
+          {
+            args: "after-used",
+            argsIgnorePattern: "^_",
+            destructuredArrayIgnorePattern: "^_",
+          },
         ],
       },
     },
