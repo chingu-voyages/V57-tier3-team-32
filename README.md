@@ -78,6 +78,15 @@ root/
 
 ## Team Documents and Channels
 
+[Project Board](https://github.com/orgs/chingu-voyages/projects/345)
+
+[Team Wiki](https://github.com/chingu-voyages/V57-tier3-team-32/wiki)
+
+- [Team Workflow, Agreements and Standards](https://github.com/chingu-voyages/V57-tier3-team-32/wiki/Team-workflow,-agreements-&-standards)
+- [PRD](https://github.com/chingu-voyages/V57-tier3-team-32/wiki/PRD)
+
+[Project Figma](https://www.figma.com/design/EbrFV2CPqlYTueDK58Gvjg/CHINGU-PR?node-id=0-1&t=wHszc2e9gMmnAhXt-1)
+
 [Meetings & Decisions](https://discord.com/channels/330284646283608064/1411707782763380788/threads/1412889569082216518)
 
 [Standup](https://discord.com/channels/330284646283608064/1411707782763380788/threads/1412451269838110751)
