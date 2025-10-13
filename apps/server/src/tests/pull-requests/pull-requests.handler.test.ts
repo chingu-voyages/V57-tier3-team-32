@@ -1,6 +1,8 @@
 import { test, describe, beforeEach, afterEach, mock, before } from "node:test";
+import type { Mock } from "node:test";
 import assert from "node:assert";
 import axios from "axios";
+
 import type { Request, Response } from "express";
 
 let getPullRequests: typeof import("../../handlers/pull-requests.handler.js").getPullRequests;
@@ -16,19 +18,21 @@ before(async () => {
 });
 
 describe("Pull Requests Handler", () => {
-  let mockReq: Partial<Request>;
-  let mockRes: Partial<Response>;
-  let statusMock: any;
-  let jsonMock: any;
+  let reqMock: Partial<Request>;
+  let resMock: Partial<Response> & {
+    status: Mock<Response["status"]>;
+    json: Mock<Response["json"]>;
+  };
 
   beforeEach(() => {
     mock.restoreAll();
 
-    statusMock = mock.fn(() => mockRes);
-    jsonMock = mock.fn();
-    mockRes = {
-      status: statusMock,
-      json: jsonMock,
+    resMock = {
+      // TODO: add lint exception to variables starting with _
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      status: mock.fn((_code: number) => resMock) as Mock<Response["status"]>,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      json: mock.fn((_body: unknown) => resMock) as Mock<Response["json"]>,
     };
   });
 
@@ -37,7 +41,7 @@ describe("Pull Requests Handler", () => {
   });
 
   test("should return 200 with pull requests when all parameters are valid", async () => {
-    mockReq = {
+    reqMock = {
       query: {
         owner: "testowner",
         repo: "testrepo",
@@ -105,27 +109,27 @@ describe("Pull Requests Handler", () => {
 
     mock.method(axios, "get", () => Promise.resolve(mockPullRequests));
 
-    await getPullRequests(mockReq as Request, mockRes as Response);
+    await getPullRequests(reqMock as Request, resMock as Response);
 
-    assert.strictEqual(statusMock.mock.callCount(), 1);
-    assert.deepStrictEqual(statusMock.mock.calls[0].arguments, [200]);
-    assert.strictEqual(jsonMock.mock.callCount(), 1);
-    assert.deepStrictEqual(jsonMock.mock.calls[0].arguments, [expected]);
+    assert.strictEqual(resMock.status.mock.callCount(), 1);
+    assert.deepStrictEqual(resMock.status.mock.calls[0]?.arguments, [200]);
+    assert.strictEqual(resMock.json.mock.callCount(), 1);
+    assert.deepStrictEqual(resMock.json.mock.calls[0]?.arguments, [expected]);
   });
 
   test("should return 500 when service throws an error", async () => {
-    mockReq = {
+    reqMock = {
       query: { owner: "testowner", repo: "testrepo" },
     };
 
     mock.method(axios, "get", () => Promise.reject(new Error("Network error")));
 
-    await getPullRequests(mockReq as Request, mockRes as Response);
+    await getPullRequests(reqMock as Request, resMock as Response);
 
-    assert.strictEqual(statusMock.mock.callCount(), 1);
-    assert.deepStrictEqual(statusMock.mock.calls[0].arguments, [500]);
-    assert.strictEqual(jsonMock.mock.callCount(), 1);
-    assert.deepStrictEqual(jsonMock.mock.calls[0].arguments, [
+    assert.strictEqual(resMock.status.mock.callCount(), 1);
+    assert.deepStrictEqual(resMock.status.mock.calls[0]?.arguments, [500]);
+    assert.strictEqual(resMock.json.mock.callCount(), 1);
+    assert.deepStrictEqual(resMock.json.mock.calls[0]?.arguments, [
       { error: "Internal server error." },
     ]);
   });
