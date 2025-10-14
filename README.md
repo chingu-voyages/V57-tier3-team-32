@@ -2,6 +2,19 @@
 
 Welcome to the PR Status Board! This web application tracks current PRs waiting for review as well as the history of PRs completed by the team.
 
+## Deployment URLS
+
+1. Frontend Netlify Deployment : <https://v57-tier3-team-32.netlify.app/>
+2. Backend Render Deployment: <https://v57-tier3-team-32-x1uz.onrender.com/>
+
+## Teamwork and Collaboration
+
+- Project management: [Github Projects board](https://github.com/orgs/chingu-voyages/projects/345)
+- Design: [Figma board](https://www.figma.com/design/EbrFV2CPqlYTueDK58Gvjg/CHINGU-PR?node-id=0-1&t=wHszc2e9gMmnAhXt-1)
+- Team Agreements, Workflow, Standards: [Github Wiki Article](https://github.com/chingu-voyages/V57-tier3-team-32/wiki/Team-workflow,-agreements-&-standards)
+- Initial Product requirements: [Github Wiki Article](https://github.com/chingu-voyages/V57-tier3-team-32/wiki/PRD)
+- Brainstorming and Retrospectives: [Miro Board](https://miro.com/app/board/uXjVJJfewSU=/)
+
 ## Tech stack
 
 - **Languages**: [Typescript](https://www.typescriptlang.org)
@@ -70,17 +83,6 @@ root/
    # from the root of the repo once again
    docker compose down -v
    ```
-
-## Deployment URLS
-
-1. Frontend Netlify Deployment : <https://v57-tier3-team-32.netlify.app/>
-2. Backend Render Deployment: <https://v57-tier3-team-32-x1uz.onrender.com/>
-
-## Team Documents and Channels
-
-[Meetings & Decisions](https://discord.com/channels/330284646283608064/1411707782763380788/threads/1412889569082216518)
-
-[Standup](https://discord.com/channels/330284646283608064/1411707782763380788/threads/1412451269838110751)
 
 ## Our Team
 
