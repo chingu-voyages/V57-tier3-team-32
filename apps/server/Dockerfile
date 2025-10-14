@@ -1,6 +1,6 @@
 # escape=`
 # oldest supported node version for `lint-staged@16.1.6`
-FROM node:20.17.0-alpine AS base
+FROM node:22.12.0-alpine AS base
 WORKDIR /home/node/app/
 
 # defined as additional_context
