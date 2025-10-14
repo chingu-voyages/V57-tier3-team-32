@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import type { PR } from "types/pr";
+import type { PR } from "@/types/pr";
 import {
   Sheet,
   SheetTrigger,
