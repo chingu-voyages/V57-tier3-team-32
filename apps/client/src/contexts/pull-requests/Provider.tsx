@@ -1,24 +1,13 @@
-import { fetchPullRequestsService } from "@/services/pull-requests.service";
 import {
-  createContext,
-  use,
   useState,
   useEffect,
   type ReactNode,
   useMemo,
   useCallback,
 } from "react";
-import type { PR } from "types/pr";
-
-interface PRContextType {
-  pullRequests: PR[];
-  repo: string | null;
-  isLoading: boolean;
-  error: string | null;
-  refreshPullRequests: () => Promise<void>;
-}
-
-const PRContext = createContext<PRContextType | undefined>(undefined);
+import { fetchPullRequestsService } from "@/services/pull-requests.service";
+import { PRContext } from ".";
+import type { PR } from "@/types/pr";
 
 interface PRProviderProps {
   children: ReactNode;
@@ -64,12 +53,4 @@ export function PRProvider({ children }: PRProviderProps) {
   );
 
   return <PRContext value={value}>{children}</PRContext>;
-}
-
-export function usePRContext() {
-  const context = use(PRContext);
-  if (context === undefined) {
-    throw new Error("usePRContext must be used within a PRProvider");
-  }
-  return context;
 }

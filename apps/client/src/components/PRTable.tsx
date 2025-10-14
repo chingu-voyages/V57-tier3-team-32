@@ -9,8 +9,8 @@ import {
 
 import timeAgo from "./ui/utilis";
 import { PRTableHeader } from "./ui/PRTableHeader";
-import type { PR } from "types/pr";
-import { usePRContext } from "@/contexts/pull-requests.context";
+import type { PR } from "@/types/pr";
+import { usePRContext } from "@/contexts/pull-requests";
 
 interface Column {
   key: string;

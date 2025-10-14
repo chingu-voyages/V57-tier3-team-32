@@ -7,7 +7,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "./ui/Dropdown/dropdown-menu";
-import type { MultiSelectDropdownProps } from "../../types/sidebar";
+import type { MultiSelectDropdownProps } from "@/types/sidebar";
 
 export const MultiSelectDropdown = ({
   options,

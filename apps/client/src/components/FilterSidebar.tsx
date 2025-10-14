@@ -1,7 +1,7 @@
 import Button from "./ui/Button";
 import { Checkbox } from "./ui/Checkbox/checkbox";
 import { Label } from "./ui/Label/label";
-import type { FilterSidebarProp } from "../../types/sidebar";
+import type { FilterSidebarProp } from "@/types/sidebar";
 import { Card } from "./ui/Card";
 import { MultiSelectDropdown } from "./MultiSelectDropdown";
 
