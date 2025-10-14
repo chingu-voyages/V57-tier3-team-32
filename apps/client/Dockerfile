@@ -1,6 +1,6 @@
 # escape=`
 # oldest supported node version for `@vitejs/plugin-react@5.0.0`
-FROM node:20.19.0-alpine AS base
+FROM node:22.12.0-alpine AS base
 WORKDIR /home/node/app/
 
 # defined as additional_context
