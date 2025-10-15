@@ -6,7 +6,7 @@ import {
   useMemo,
   useCallback,
 } from "react";
-import type { PR } from "types/pr";
+import type { PR } from "@/types/pr";
 import PRContext from "./PRContextType";
 
 interface PRProviderProps {

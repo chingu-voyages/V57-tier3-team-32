@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import type { PR } from "types/pr";
+import type { PR } from "@/types/pr";
 interface PRContextType {
   pullRequests: PR[];
   repo: string | null;

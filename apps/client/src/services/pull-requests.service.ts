@@ -1,4 +1,4 @@
-import type { ApiPullRequest, PR } from "types/pr";
+import type { ApiPullRequest, PR } from "@/types/pr";
 import { fetchPullRequests } from "../api/fetch-pull-requests";
 
 function mapApiResponseToPR(prs: ApiPullRequest["pullRequests"]): PR[] {

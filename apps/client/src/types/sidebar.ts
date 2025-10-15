@@ -1,9 +1,9 @@
-type StatusFilters = {
+interface StatusFilters {
   open: boolean;
   closed: boolean;
   draft: boolean;
   merged: boolean;
-};
+}
 
 export interface FilterSidebarProp {
   statusFilters: StatusFilters;
