@@ -1,5 +1,6 @@
 import "./App.css";
-import { PRProvider, usePRContext } from "./contexts/pull-requests.context";
+import { PRProvider } from "./contexts/PRProvider";
+import { usePRContext } from "./contexts/pull-requests.context";
 import { Index } from "./pages/Index";
 
 function AppContent() {
