@@ -5,7 +5,7 @@ export interface NormalizedPR {
     title: string;
     creator: string;
     creationTimestamp: string;
-    requestedReviewers: [number, string][];
+    requestedReviewers: (string | number)[][];
     lastActionType: string;
     lastActionTimestamp: string;
     url: string;
