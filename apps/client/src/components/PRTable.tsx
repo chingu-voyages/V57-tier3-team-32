@@ -132,12 +132,12 @@ export function PRTable({ prs, repo }: { prs: PR[]; repo: string }) {
 
               <TableCell className="py-3 min-w-[150px] hidden lg:table-cell">
                 <div className="flex flex-col gap-1">
-                  {pullRequest.reviewers.map((reviewer, index) => {
-                    const initials = reviewer.slice(0, 2).toUpperCase();
-                    const name = reviewer.slice(2);
+                  {pullRequest.reviewers.map((reviewer) => {
+                    const initials = reviewer[1].slice(0, 2).toUpperCase();
+                    const name = reviewer[1].slice(2);
                     return (
                       <span
-                        key={index}
+                        key={reviewer[0]}
                         className="inline-flex items-center px-2 py-1 text-xs font-medium text-gray-300 border border-gray-600"
                       >
                         <span className="font-bold text-black mr-1">

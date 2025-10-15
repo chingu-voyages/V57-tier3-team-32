@@ -31,7 +31,7 @@ export async function fetchAndNormalizePullRequests(
       creator: pr.user.login,
       creationTimestamp: pr.created_at,
       requestedReviewers: pr.requested_reviewers.map(
-        (reviewer: RequestedReviewer) => reviewer.login,
+        (reviewer: RequestedReviewer) => [reviewer.id, reviewer.login],
       ),
       lastActionType: pr.merged_at ? "merged" : pr.state,
       lastActionTimestamp: pr.updated_at,
